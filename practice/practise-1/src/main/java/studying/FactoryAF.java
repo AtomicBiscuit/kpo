@@ -28,13 +28,12 @@ public class FactoryAF {
     }
 
     public void saleCar() {
-        customers.stream().filter(customer -> Objects.isNull(customer.getCar()))
-                .forEach(customer -> {
-                    if (!cars.isEmpty()) {
-                        customer.setCar(cars.getFirst());
-                        cars.removeFirst();
-                    }
-                });
+        customers.stream().filter(customer -> Objects.isNull(customer.getCar())).forEach(customer -> {
+            if (!cars.isEmpty()) {
+                customer.setCar(cars.getFirst());
+                cars.removeFirst();
+            }
+        });
 
         cars.clear();
     }

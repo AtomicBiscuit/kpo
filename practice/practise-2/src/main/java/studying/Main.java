@@ -1,41 +1,49 @@
 package studying;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import studying.domains.Customer;
+import studying.factories.HandCarFactory;
+import studying.factories.LevitateCarFactory;
+import studying.factories.PedalCarFactory;
+import studying.params.EmptyEngineParams;
+import studying.params.PedalEngineParams;
+import studying.services.CarService;
+import studying.services.CustomerStorage;
+import studying.services.HseCarService;
 
 public class Main {
     public static void main(String[] args) {
-        CarService cars = new CarService();
-        CustomerStorage customers = new CustomerStorage();
+        var carService = new CarService();
 
-        HseCarService hse = new HseCarService(cars, customers);
+        var customerStorage = new CustomerStorage();
 
-        PedalCarFactory pedalFactory = new PedalCarFactory();
-        HandCarFactory handFactory = new HandCarFactory();
+        var hseCarService = new HseCarService(carService, customerStorage);
 
-        customers.addCustomer(new Customer("First", 6, 4));
-        customers.addCustomer(new Customer("Second", 4, 6));
-        customers.addCustomer(new Customer("Third", 6, 6));
-        customers.addCustomer(new Customer("Fourth", 4, 4));
+        var pedalCarFactory = new PedalCarFactory();
+        var handCarFactory = new HandCarFactory();
+        var levitateCarFactory = new LevitateCarFactory();
 
-        cars.addCar(handFactory, EmptyEngineParams.DEFAULT);
-        cars.addCar(handFactory, EmptyEngineParams.DEFAULT);
-        cars.addCar(pedalFactory, new PedalEngineParams(4));
-        cars.addCar(pedalFactory, new PedalEngineParams(6));
+
+        customerStorage.addCustomer(new Customer("First", 6, 4, 108));
+        customerStorage.addCustomer(new Customer("Second", 4, 6, 96));
+        customerStorage.addCustomer(new Customer("Third", 6, 6, 301));
+        customerStorage.addCustomer(new Customer("Fourth", 4, 4, 85));
+
+        carService.addCar(levitateCarFactory, EmptyEngineParams.DEFAULT);
+
+        carService.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
+        carService.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
+
+        carService.addCar(pedalCarFactory, new PedalEngineParams(4));
+        carService.addCar(pedalCarFactory, new PedalEngineParams(6));
 
         System.out.println("Before Selling: \n");
 
-        for (final var customer : customers.getCustomers()) {
-            System.out.println(customer.toString());
-        }
+        customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
 
-        hse.sellCars();
+        hseCarService.sellCars();
 
         System.out.println("\nAfter Selling: \n");
 
-        for (var customer : customers.getCustomers()) {
-            System.out.println(customer.toString());
-        }
+        customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
     }
 }

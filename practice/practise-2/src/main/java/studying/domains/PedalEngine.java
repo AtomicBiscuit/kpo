@@ -1,17 +1,17 @@
-package studying;
+package studying.domains;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import studying.interfaces.IEngine;
 
 @ToString
 @Getter
-public class PedalEngine implements IEngine{
+public class PedalEngine implements IEngine {
     private final int size;
 
     @Override
     public boolean isCompatible(Customer customer) {
-        return customer.legPower > 5;
+        return customer.getLegPower() > 5;
     }
 
     public PedalEngine(int size) {

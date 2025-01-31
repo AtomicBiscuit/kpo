@@ -4,14 +4,23 @@ import hse.kpo.domains.Car;
 import hse.kpo.domains.HandEngine;
 import hse.kpo.interfaces.ICarFactory;
 import hse.kpo.params.EmptyEngineParams;
-import org.springframework.stereotype.Component;
 
-@Component
+/**
+ Класс для порождения автомобилей с ручным двигателе
+ */
 public class HandCarFactory implements ICarFactory<EmptyEngineParams> {
+
+    /**
+     Создаёт автомобиль с ручным двигателем
+
+     @param carParams параметры двигателя
+     @param carNumber уникальный идентификатор автомобиля
+     @return новый автомобиль
+     */
     @Override
     public Car createCar(EmptyEngineParams carParams, int carNumber) {
-        var engine = new HandEngine(); // Создаем двигатель без каких-либо параметров
+        var engine = new HandEngine();
 
-        return new Car(carNumber, engine); // создаем автомобиль с ручным приводом
+        return new Car(carNumber, engine);
     }
 }

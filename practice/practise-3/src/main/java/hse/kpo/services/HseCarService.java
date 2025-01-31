@@ -1,13 +1,14 @@
 package hse.kpo.services;
 
+import lombok.RequiredArgsConstructor;
 import hse.kpo.interfaces.ICarProvider;
 import hse.kpo.interfaces.ICustomerProvider;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
-@Component
+/**
+ Класс, представляющий систему для учёта клиентов и произведённых на продажу автомобилей.
+ */
 @RequiredArgsConstructor
 public class HseCarService {
 
@@ -15,17 +16,18 @@ public class HseCarService {
 
     private final ICustomerProvider customerProvider;
 
-    public void sellCars()
-    {
-        // получаем список покупателей
+    /**
+     Присваивает пользователям в хранилище продающиеся автомобили, если они совместимы.
+     */
+    public void sellCars() {
         var customers = customerProvider.getCustomers();
-        // пробегаемся по полученному списку
+
         customers.stream().filter(customer -> Objects.isNull(customer.getCar()))
-                .forEach(customer -> {
-                    var car = carProvider.takeCar(customer);
-                    if (Objects.nonNull(car)) {
-                        customer.setCar(car);
-                    }
-                });
+                 .forEach(customer -> {
+                     var car = carProvider.takeCar(customer);
+                     if (Objects.nonNull(car)) {
+                         customer.setCar(car);
+                     }
+                 });
     }
 }

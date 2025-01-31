@@ -22,7 +22,6 @@ public class Main {
         var handCarFactory = new HandCarFactory();
         var levitateCarFactory = new LevitateCarFactory();
 
-
         customerStorage.addCustomer(new Customer("First", 6, 4, 108));
         customerStorage.addCustomer(new Customer("Second", 4, 6, 96));
         customerStorage.addCustomer(new Customer("Third", 6, 6, 301));

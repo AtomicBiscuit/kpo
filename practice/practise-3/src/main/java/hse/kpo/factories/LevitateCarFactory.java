@@ -4,10 +4,12 @@ import hse.kpo.domains.Car;
 import hse.kpo.domains.LevitateEngine;
 import hse.kpo.interfaces.ICarFactory;
 import hse.kpo.params.EmptyEngineParams;
+import org.springframework.stereotype.Component;
 
 /**
  Класс для порождения летающих автомобилей
  */
+@Component
 public class LevitateCarFactory implements ICarFactory<EmptyEngineParams> {
 
     /**

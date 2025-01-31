@@ -3,17 +3,22 @@ package hse.kpo.services;
 import lombok.RequiredArgsConstructor;
 import hse.kpo.interfaces.ICarProvider;
 import hse.kpo.interfaces.ICustomerProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 /**
  Класс, представляющий систему для учёта клиентов и произведённых на продажу автомобилей.
  */
+@Component
 @RequiredArgsConstructor
 public class HseCarService {
 
+    @Autowired
     private final ICarProvider carProvider;
 
+    @Autowired
     private final ICustomerProvider customerProvider;
 
     /**

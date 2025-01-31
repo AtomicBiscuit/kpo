@@ -1,10 +1,9 @@
 package hse.kpo.domains;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.RequiredArgsConstructor;
-
 
 /**
  Класс, представляющий клиентов сервиса

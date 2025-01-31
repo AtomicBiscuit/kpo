@@ -1,6 +1,5 @@
 package hse.kpo.factories;
 
-
 import hse.kpo.domains.Car;
 import hse.kpo.domains.PedalEngine;
 import hse.kpo.interfaces.ICarFactory;

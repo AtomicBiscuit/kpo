@@ -1,4 +1,7 @@
 package studying.params;
 
-public record PedalEngineParams(int pedalSize) {
-}
+/**
+ Класс параметров для педального двигателя
+
+ @param pedalSize размер педали */
+public record PedalEngineParams(int pedalSize) {}

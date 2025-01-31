@@ -2,13 +2,16 @@ package studying.interfaces;
 
 import studying.domains.Customer;
 
+/**
+ Интерфейс двигателя
+ */
 public interface IEngine {
 
     /**
-     * Метод для проверки совместимости двигателя с покупателем.
-     *
-     * @param customer - покупатель, с которым мы сравниваем двигатель
-     * @return true, если двигатель подходит покупателю
+     Определяет совместимость покупателя и двигателя
+
+     @param customer покупатель
+     @return true, если двигатель подходит покупателю
      */
     boolean isCompatible(Customer customer);
 }

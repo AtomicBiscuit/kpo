@@ -1,17 +1,17 @@
 package studying.factories;
 
 import studying.domains.Car;
-import studying.domains.HandEngine;
+import studying.domains.LevitateEngine;
 import studying.interfaces.ICarFactory;
 import studying.params.EmptyEngineParams;
 
 /**
- Класс для порождения автомобилей с ручным двигателе
+ Класс для порождения летающих автомобилей
  */
-public class HandCarFactory implements ICarFactory<EmptyEngineParams> {
+public class LevitateCarFactory implements ICarFactory<EmptyEngineParams> {
 
     /**
-     Создаёт автомобиль с ручным двигателем
+     Создаёт автомобиль с левитирующим двигателем
 
      @param carParams параметры двигателя
      @param carNumber уникальный идентификатор автомобиля
@@ -19,7 +19,7 @@ public class HandCarFactory implements ICarFactory<EmptyEngineParams> {
      */
     @Override
     public Car createCar(EmptyEngineParams carParams, int carNumber) {
-        var engine = new HandEngine();
+        var engine = new LevitateEngine();
 
         return new Car(carNumber, engine);
     }

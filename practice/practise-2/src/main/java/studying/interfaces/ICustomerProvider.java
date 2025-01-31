@@ -4,6 +4,14 @@ import studying.domains.Customer;
 
 import java.util.List;
 
+/**
+ Интерфейс для хранилища покупателей
+ */
 public interface ICustomerProvider {
-    List<Customer> getCustomers(); // метод возвращает коллекцию только для чтения, так как мы не хотим давать вызывающему коду возможность изменять список
+    /**
+     Возвращает неизменяемый список всех пользователей
+
+     @return список пользователей
+     */
+    List<Customer> getCustomers();
 }

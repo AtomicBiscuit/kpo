@@ -1,19 +1,19 @@
 package hse.kpo.factories;
 
 import hse.kpo.domains.Car;
-import hse.kpo.domains.HandEngine;
+import hse.kpo.domains.LevitateEngine;
 import hse.kpo.interfaces.ICarFactory;
 import hse.kpo.params.EmptyEngineParams;
 import org.springframework.stereotype.Component;
 
 /**
- Класс для порождения автомобилей с ручным двигателе
+ Класс для порождения летающих автомобилей
  */
 @Component
-public class HandCarFactory implements ICarFactory<EmptyEngineParams> {
+public class LevitateCarFactory implements ICarFactory<EmptyEngineParams> {
 
     /**
-     Создаёт автомобиль с ручным двигателем
+     Создаёт автомобиль с левитирующим двигателем
 
      @param carParams параметры двигателя
      @param carNumber уникальный идентификатор автомобиля
@@ -21,7 +21,7 @@ public class HandCarFactory implements ICarFactory<EmptyEngineParams> {
      */
     @Override
     public Car createCar(EmptyEngineParams carParams, int carNumber) {
-        var engine = new HandEngine();
+        var engine = new LevitateEngine();
 
         return new Car(carNumber, engine);
     }

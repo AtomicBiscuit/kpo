@@ -3,7 +3,16 @@ package hse.kpo.interfaces;
 import hse.kpo.domains.Car;
 import hse.kpo.domains.Customer;
 
+/**
+ Интерфейс для хранилища автомобилей
+ */
 public interface ICarProvider {
 
-    Car takeCar(Customer customer); // Метод возвращает optional на Car, что означает, что метод может ничего не вернуть
+    /**
+     Извлекает автомобиль, который подойдёт покупателю, из хранилища
+
+     @param customer покупатель
+     @return подходящий автомобиль, либо null если такого не нашлось
+     */
+    Car takeCar(Customer customer);
 }

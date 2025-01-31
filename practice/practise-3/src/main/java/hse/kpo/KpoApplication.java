@@ -15,40 +15,38 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class KpoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KpoApplication.class, args);
+    public static void main(String[] args) {
+        var springApplicationContext = SpringApplication.run(KpoApplication.class, args);
 
-		var carService = new CarService();
+        var carService = springApplicationContext.getBean(CarService.class);
+        var customerStorage = springApplicationContext.getBean(CustomerStorage.class);
+        var hseCarService = springApplicationContext.getBean(HseCarService.class);
 
-		var customerStorage = new CustomerStorage();
+        var pedalCarFactory = springApplicationContext.getBean(PedalCarFactory.class);
+        var handCarFactory = springApplicationContext.getBean(HandCarFactory.class);
+        var levitateCarFactory = springApplicationContext.getBean(LevitateCarFactory.class);
 
-		var hseCarService = new HseCarService(carService, customerStorage);
+        customerStorage.addCustomer(new Customer("First", 6, 4, 108));
+        customerStorage.addCustomer(new Customer("Second", 4, 6, 96));
+        customerStorage.addCustomer(new Customer("Third", 6, 6, 301));
+        customerStorage.addCustomer(new Customer("Fourth", 4, 4, 85));
 
-		var pedalCarFactory = new PedalCarFactory();
-		var handCarFactory = new HandCarFactory();
-		var levitateCarFactory = new LevitateCarFactory();
+        carService.addCar(levitateCarFactory, EmptyEngineParams.DEFAULT);
 
-		customerStorage.addCustomer(new Customer("First", 6, 4, 108));
-		customerStorage.addCustomer(new Customer("Second", 4, 6, 96));
-		customerStorage.addCustomer(new Customer("Third", 6, 6, 301));
-		customerStorage.addCustomer(new Customer("Fourth", 4, 4, 85));
+        carService.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
+        carService.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
 
-		carService.addCar(levitateCarFactory, EmptyEngineParams.DEFAULT);
+        carService.addCar(pedalCarFactory, new PedalEngineParams(4));
+        carService.addCar(pedalCarFactory, new PedalEngineParams(6));
 
-		carService.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
-		carService.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
+        System.out.println("Before Selling: \n");
 
-		carService.addCar(pedalCarFactory, new PedalEngineParams(4));
-		carService.addCar(pedalCarFactory, new PedalEngineParams(6));
+        customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
 
-		System.out.println("Before Selling: \n");
+        hseCarService.sellCars();
 
-		customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
+        System.out.println("\nAfter Selling: \n");
 
-		hseCarService.sellCars();
-
-		System.out.println("\nAfter Selling: \n");
-
-		customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
-	}
+        customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
+    }
 }

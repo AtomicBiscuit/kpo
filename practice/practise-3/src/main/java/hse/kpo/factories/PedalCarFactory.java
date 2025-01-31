@@ -4,10 +4,12 @@ import hse.kpo.domains.Car;
 import hse.kpo.domains.PedalEngine;
 import hse.kpo.interfaces.ICarFactory;
 import hse.kpo.params.PedalEngineParams;
+import org.springframework.stereotype.Component;
 
 /**
  Класс для порождения автомобилей с педальным двигателе
  */
+@Component
 public class PedalCarFactory implements ICarFactory<PedalEngineParams> {
 
     /**

@@ -4,6 +4,8 @@ import hse.kpo.domains.Car;
 import hse.kpo.domains.Customer;
 import hse.kpo.interfaces.ICarFactory;
 import hse.kpo.interfaces.ICarProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +14,8 @@ import java.util.List;
 /**
  Класс-хранилище автомобилей
  */
+@Component
 public class CarService implements ICarProvider {
-
     private final List<Car> cars = new ArrayList<>();
 
     private int carNumberCounter = 0;

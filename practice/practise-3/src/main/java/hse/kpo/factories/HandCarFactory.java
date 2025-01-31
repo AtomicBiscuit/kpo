@@ -4,10 +4,12 @@ import hse.kpo.domains.Car;
 import hse.kpo.domains.HandEngine;
 import hse.kpo.interfaces.ICarFactory;
 import hse.kpo.params.EmptyEngineParams;
+import org.springframework.stereotype.Component;
 
 /**
  Класс для порождения автомобилей с ручным двигателе
  */
+@Component
 public class HandCarFactory implements ICarFactory<EmptyEngineParams> {
 
     /**

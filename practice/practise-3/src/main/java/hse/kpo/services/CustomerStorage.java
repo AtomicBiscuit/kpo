@@ -1,20 +1,20 @@
 package hse.kpo.services;
 
 import hse.kpo.domains.Customer;
-import hse.kpo.interfaces.ICustomerProvider;
+import hse.kpo.interfaces.CustomerProvider;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
 /**
- * Класс-хранилище пользователей
+ * Класс-хранилище пользователей.
  */
 @Component
-public class CustomerStorage implements ICustomerProvider {
-    private List<Customer> customers = new ArrayList<>();
+public class CustomerStorage implements CustomerProvider {
+    private final List<Customer> customers = new ArrayList<>();
 
     /**
-     * Возвращает список всех пользователей
+     * Возвращает список всех пользователей.
      *
      * @return список пользователей
      */
@@ -24,7 +24,7 @@ public class CustomerStorage implements ICustomerProvider {
     }
 
     /**
-     * Добавляет пользователя в хранилище
+     * Добавляет пользователя в хранилище.
      *
      * @param customer пользователь для добавления
      */

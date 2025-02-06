@@ -1,25 +1,25 @@
 package hse.kpo.domains;
 
+import hse.kpo.interfaces.Engine;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import hse.kpo.interfaces.IEngine;
 
 
 /**
- Класс, представляющий педальный двигатель
+ * Класс, представляющий педальный двигатель.
  */
 @ToString
 @Getter
 @RequiredArgsConstructor
-public class PedalEngine implements IEngine {
+public class PedalEngine implements Engine {
     private final int size;
 
     /**
-     Определяет совместимость покупателя и двигателя
-
-     @param customer покупатель
-     @return true, если клиенту хватает силы ног
+     * Определяет совместимость покупателя и двигателя.
+     *
+     * @param customer покупатель
+     * @return true, если клиенту хватает силы ног
      */
     @Override
     public boolean isCompatible(Customer customer) {

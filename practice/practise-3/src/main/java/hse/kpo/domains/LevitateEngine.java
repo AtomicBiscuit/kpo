@@ -1,19 +1,19 @@
 package hse.kpo.domains;
 
+import hse.kpo.interfaces.Engine;
 import lombok.ToString;
-import hse.kpo.interfaces.IEngine;
 
 /**
- Класс, представляющий двигатель для левитирующих автомобилей
+ * Класс, представляющий двигатель для левитирующих автомобилей.
  */
 @ToString
-public class LevitateEngine implements IEngine {
+public class LevitateEngine implements Engine {
 
     /**
-     Определяет совместимость покупателя и двигателя
-
-     @param customer покупатель
-     @return true, если клиенту хватит iq
+     * Определяет совместимость покупателя и двигателя.
+     *
+     * @param customer покупатель
+     * @return true, если клиенту хватит iq
      */
     @Override
     public boolean isCompatible(Customer customer) {

@@ -37,7 +37,7 @@ class CustomerStorageTests {
     @DisplayName("Добавление 10 пользователей")
     void addManyCustomersTest() {
         var customers = new ArrayList<Customer>();
-        range(0, 10).forEach(number -> customers.add(new Customer("Anton " + Integer.toString(number), 2, 3, 104)));
+        range(0, 10).forEach(number -> customers.add(new Customer("Anton " + number, 2, 3, 104)));
 
         customers.forEach(customer -> customerStorage.addCustomer(customer));
 

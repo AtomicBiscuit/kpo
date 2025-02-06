@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CustomerStorage implements CustomerProvider {
-    private List<Customer> customers = new ArrayList<>();
+    private final List<Customer> customers = new ArrayList<>();
 
     /**
      * Возвращает список всех пользователей.

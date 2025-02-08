@@ -2,40 +2,45 @@ package hse.kpo.services;
 
 import hse.kpo.domains.Car;
 import hse.kpo.domains.Customer;
-import hse.kpo.interfaces.ICarFactory;
-import hse.kpo.interfaces.ICarProvider;
-import org.springframework.stereotype.Component;
-
+import hse.kpo.interfaces.CarFactory;
+import hse.kpo.interfaces.CarProvider;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
+/**
+ * Класс-хранилище автомобилей.
+ */
 @Component
-public class CarService implements ICarProvider {
-
+public class CarService implements CarProvider {
     private final List<Car> cars = new ArrayList<>();
 
     private int carNumberCounter = 0;
 
+    /**
+     * Извлекает автомобиль, который подойдёт покупателю, из хранилища.
+     *
+     * @param customer покупатель
+     * @return подходящий автомобиль, либо null если такого не нашлось
+     */
     @Override
     public Car takeCar(Customer customer) {
-
-        var filteredCars = cars.stream().filter(car -> car.isCompatible(customer)).toList();
-
-        var firstCar = filteredCars.stream().findFirst();
+        var firstCar = cars.stream().filter(car -> car.isCompatible(customer)).findFirst();
 
         firstCar.ifPresent(cars::remove);
 
         return firstCar.orElse(null);
     }
 
-    public <TParams> void addCar(ICarFactory<TParams> carFactory, TParams carParams)
-    {
-        // создаем автомобиль из переданной фабрики
-        var car = carFactory.createCar(
-                carParams, // передаем параметры
-                ++carNumberCounter // передаем номер - номер будет начинаться с 1
-        );
+    /**
+     * Создаёт и добавляет в хранилище автомобиль.
+     *
+     * @param carFactory фабрика для порождения автомобилей
+     * @param carParams  параметры, для создания
+     */
+    public <ParamsT> void addCar(CarFactory<ParamsT> carFactory, ParamsT carParams) {
+        var car = carFactory.createCar(carParams, ++carNumberCounter);
 
-        cars.add(car); // добавляем автомобиль
+        cars.add(car);
     }
 }

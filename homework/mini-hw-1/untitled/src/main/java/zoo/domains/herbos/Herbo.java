@@ -4,7 +4,7 @@ import zoo.domains.Animal;
 import zoo.interfaces.Friendly;
 
 /**
- * Класс травоядных животных
+ * Класс травоядных животных.
  */
 public class Herbo extends Animal implements Friendly {
 }

@@ -1,7 +1,9 @@
 package zoo.interfaces;
 
-import lombok.Getter;
-
+/**
+ * Интерфейс для живых существ.
+ * Определяет суточное потребление пищи.
+ */
 public interface Alive {
-    int Food;
+    int food = 0;
 }

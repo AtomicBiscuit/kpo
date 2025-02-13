@@ -9,12 +9,12 @@ public interface Inventory {
      *
      * @param number новое значение дружелюбности
      */
-    public void setNumber(int number);
+    void setNumber(int number);
 
     /**
      * Возвращает инвентаризационный номер.
      *
      * @return значение number
      */
-    public int getNumber();
+    int getNumber();
 }

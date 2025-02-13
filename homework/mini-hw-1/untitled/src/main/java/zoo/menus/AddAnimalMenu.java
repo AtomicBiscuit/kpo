@@ -1,13 +1,10 @@
 package zoo.menus;
 
-import static java.lang.System.exit;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import zoo.ZooApplication;
 import zoo.domains.Animal;
-import zoo.domains.herbos.Herbo;
 import zoo.factories.HerboConsoleFactory;
 import zoo.factories.PredatorConsoleFactory;
 import zoo.helpers.IntHelper;
@@ -49,7 +46,7 @@ public class AddAnimalMenu implements Menu {
     @Override
     public void doLogic() {
         int action = intHelper.read("Enter a number", 1, 4);
-        Animal animal = null;
+        Animal animal;
         if (action == 1) {
             animal = herboFactory.createMonkey();
         } else if (action == 2) {

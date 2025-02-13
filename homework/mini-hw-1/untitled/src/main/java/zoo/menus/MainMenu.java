@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import zoo.ZooApplication;
-import zoo.domains.Animal;
 import zoo.domains.herbos.Herbo;
 import zoo.helpers.IntHelper;
 import zoo.interfaces.Alive;

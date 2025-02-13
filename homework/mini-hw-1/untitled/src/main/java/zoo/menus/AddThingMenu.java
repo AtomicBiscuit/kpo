@@ -24,13 +24,6 @@ public class AddThingMenu implements Menu {
     IntHelper intHelper;
 
     @Autowired
-    HerboConsoleFactory herboFactory;
-
-    @Autowired
-    PredatorConsoleFactory predatorFactory;
-
-
-    @Autowired
     ThingConsoleFactory thingFactory;
 
     /**
@@ -49,7 +42,7 @@ public class AddThingMenu implements Menu {
     @Override
     public void doLogic() {
         int action = intHelper.read("Enter a number", 1, 2);
-        Thing thing = null;
+        Thing thing;
         if (action == 1) {
             thing = thingFactory.createComputer();
         } else {

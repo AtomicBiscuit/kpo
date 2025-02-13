@@ -9,12 +9,12 @@ public interface Friendly {
      *
      * @param kindness новое значение дружелюбности
      */
-    public void setKindness(int kindness);
+    void setKindness(int kindness);
 
     /**
      * Возвращает уровень доброты.
      *
      * @return значение kindness
      */
-    public int getKindness();
+    int getKindness();
 }

@@ -1,7 +1,5 @@
 package zoo.interfaces;
 
-import zoo.ZooApplication;
-
 /**
  * Интерфейс консольного меню.
  */

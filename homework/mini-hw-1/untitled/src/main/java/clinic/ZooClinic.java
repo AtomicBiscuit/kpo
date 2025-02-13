@@ -3,7 +3,6 @@ package clinic;
 import clinic.interfaces.Clinic;
 import java.util.Random;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zoo.domains.Animal;
 

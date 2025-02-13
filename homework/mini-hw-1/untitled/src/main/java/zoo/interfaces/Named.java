@@ -9,12 +9,12 @@ public interface Named {
      *
      * @param name новое значение имени
      */
-    public void setName(String name);
+    void setName(String name);
 
     /**
      * Возвращает имя.
      *
      * @return значение name
      */
-    public String getName();
+    String getName();
 }

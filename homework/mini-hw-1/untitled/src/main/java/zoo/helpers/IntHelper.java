@@ -1,6 +1,5 @@
 package zoo.helpers;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import org.springframework.stereotype.Component;
 

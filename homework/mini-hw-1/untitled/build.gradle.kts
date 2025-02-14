@@ -31,8 +31,7 @@ dependencies {
 }
 
 application {
-    // Define the main class for the application.
-    mainClass.set("Application")
+    mainClass.set("App")
 }
 
 tasks.named<JavaExec>("run") {
@@ -54,7 +53,7 @@ tasks.jacocoTestReport {
     classDirectories.setFrom(
         files(classDirectories.files.map {
             fileTree(it) {
-                exclude("**/java/Application**")
+                exclude("**App**")
             }
         })
     )

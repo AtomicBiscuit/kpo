@@ -10,7 +10,7 @@ import zoo.interfaces.Named;
  */
 @Getter
 @Setter
-public class Thing implements Inventory, Named {
+public abstract class Thing implements Inventory, Named {
     protected int number;
 
     protected String name;

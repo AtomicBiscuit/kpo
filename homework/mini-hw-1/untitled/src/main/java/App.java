@@ -4,7 +4,7 @@ import zoo.ZooApplication;
 /**
  * Класс-приложение.
  */
-public class Application {
+public class App {
     /**
      * Точка входа в программу.
      *

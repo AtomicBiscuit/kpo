@@ -19,4 +19,11 @@ public interface Application {
      * @param newMenuName имя установленного меню
      */
     void changeMenu(String newMenuName);
+
+    /**
+     * Возвращает активное меню.
+     *
+     * @return значение menu
+     */
+    Menu getMenu();
 }

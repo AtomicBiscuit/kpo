@@ -22,7 +22,8 @@ public class ZooApplication implements Application {
 
     @Autowired
     @Qualifier("MainMenu")
-    Menu active;
+    @Getter
+    Menu menu;
 
     @Autowired
     Map<String, Menu> menus;
@@ -33,7 +34,7 @@ public class ZooApplication implements Application {
      * @param newMenuName имя установленного меню
      */
     public void changeMenu(String newMenuName) {
-        active = menus.get(newMenuName);
+        menu = menus.get(newMenuName);
     }
 
     /**
@@ -41,8 +42,8 @@ public class ZooApplication implements Application {
      */
     public void run() {
         while (true) {
-            active.print();
-            active.doLogic();
+            menu.print();
+            menu.doLogic();
         }
     }
 }

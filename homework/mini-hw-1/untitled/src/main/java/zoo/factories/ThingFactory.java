@@ -15,7 +15,7 @@ import zoo.helpers.StringHelper;
  * При создании считывает параметры из консоли.
  */
 @Component
-public class ThingConsoleFactory {
+public class ThingFactory {
 
     @Autowired
     IntHelper intHelper;
@@ -23,7 +23,7 @@ public class ThingConsoleFactory {
     @Autowired
     StringHelper stringHelper;
 
-    public static List<String> predatorsList = List.of("Computer", "Table");
+    public static List<String> thingsList = List.of("Computer", "Table");
 
     /**
      * Считывает из консоли инвентаризационный номер и название.

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import zoo.domains.Thing;
-import zoo.factories.ThingConsoleFactory;
+import zoo.factories.ThingFactory;
 import zoo.helpers.StringHelper;
 import zoo.interfaces.Application;
 import zoo.interfaces.Menu;
@@ -23,7 +23,7 @@ public class AddThingMenu implements Menu {
     StringHelper stringHelper;
 
     @Autowired
-    ThingConsoleFactory thingFactory;
+    ThingFactory thingFactory;
 
     /**
      * Выводит меню в консоль.
@@ -31,7 +31,7 @@ public class AddThingMenu implements Menu {
     @Override
     public void print() {
         System.out.println("Choose a thing:");
-        ThingConsoleFactory.predatorsList.forEach(name -> System.out.println("....Add a " + name));
+        ThingFactory.thingsList.forEach(name -> System.out.println("....Add a " + name));
     }
 
     /**

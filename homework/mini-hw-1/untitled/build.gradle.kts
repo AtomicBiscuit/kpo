@@ -1,4 +1,5 @@
 plugins {
+    application
     java
     checkstyle
     jacoco
@@ -29,6 +30,16 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+application {
+    // Define the main class for the application.
+    mainClass.set("Application")
+}
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
+}
+
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
@@ -43,7 +54,7 @@ tasks.jacocoTestReport {
     classDirectories.setFrom(
         files(classDirectories.files.map {
             fileTree(it) {
-                exclude("**/hse/kpo/KpoApplication**")
+                exclude("**/java/Application**")
             }
         })
     )

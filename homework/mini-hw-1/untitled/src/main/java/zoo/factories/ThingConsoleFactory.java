@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.util.Tuple;
 import zoo.domains.Thing;
-import zoo.domains.predators.Predator;
 import zoo.domains.things.Computer;
 import zoo.domains.things.Table;
 import zoo.helpers.IntHelper;

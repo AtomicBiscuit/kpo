@@ -31,7 +31,7 @@ public class AddAnimalMenu implements Menu {
     @Autowired
     PredatorFactory predatorFactory;
 
-    static public List<String> names = Stream.concat(HerboFactory.herbosList.stream(),
+    public static List<String> names = Stream.concat(HerboFactory.herbosList.stream(),
                                                      PredatorFactory.predatorsList.stream()).toList();
 
     /**

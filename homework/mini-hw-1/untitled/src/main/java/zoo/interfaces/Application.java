@@ -3,7 +3,7 @@ package zoo.interfaces;
 import zoo.domains.Zoo;
 
 /**
- * Интерфейс приложения-зоопарка
+ * Интерфейс приложения-зоопарка.
  */
 public interface Application {
     /**

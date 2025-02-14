@@ -6,11 +6,11 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import zoo.ZooApplication;
 import zoo.domains.Animal;
 import zoo.factories.HerboFactory;
 import zoo.factories.PredatorFactory;
 import zoo.helpers.StringHelper;
+import zoo.interfaces.Application;
 import zoo.interfaces.Menu;
 
 /**
@@ -20,7 +20,7 @@ import zoo.interfaces.Menu;
 public class AddAnimalMenu implements Menu {
     @Autowired
     @Lazy
-    ZooApplication application;
+    Application application;
 
     @Autowired
     StringHelper stringHelper;

@@ -4,10 +4,10 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import zoo.ZooApplication;
 import zoo.domains.Thing;
 import zoo.factories.ThingConsoleFactory;
 import zoo.helpers.StringHelper;
+import zoo.interfaces.Application;
 import zoo.interfaces.Menu;
 
 /**
@@ -17,7 +17,7 @@ import zoo.interfaces.Menu;
 public class AddThingMenu implements Menu {
     @Autowired
     @Lazy
-    ZooApplication application;
+    Application application;
 
     @Autowired
     StringHelper stringHelper;

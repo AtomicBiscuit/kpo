@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.util.Tuple;
+import zoo.domains.predators.Predator;
 import zoo.domains.predators.Tiger;
 import zoo.domains.predators.Wolf;
 import zoo.helpers.IntHelper;
@@ -14,12 +15,14 @@ import zoo.helpers.StringHelper;
  * При создании считывает параметры из консоли.
  */
 @Component
-public class PredatorConsoleFactory {
+public class PredatorFactory {
     @Autowired
     IntHelper intHelper;
 
     @Autowired
     StringHelper stringHelper;
+
+    public static List<String> predatorsList = List.of("Wolf", "Tiger");
 
     /**
      * Считывает из консоли суточное потребление пищи и инвентаризационный номер.
@@ -32,6 +35,19 @@ public class PredatorConsoleFactory {
         String name = stringHelper.read("Enter animal name");
 
         return new Tuple<>(List.of(food, num), name);
+    }
+
+    /**
+     * Создаёт новое хищное животное по названию с параметрами, считанными с клавиатуры.
+     *
+     * @return новое животное
+     */
+    public Predator create(String name) {
+        return switch (name) {
+            case "wolf" -> createWolf();
+            case "tiger" -> createTiger();
+            default -> null;
+        };
     }
 
     /**

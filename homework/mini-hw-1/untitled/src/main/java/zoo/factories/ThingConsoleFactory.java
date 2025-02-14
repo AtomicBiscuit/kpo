@@ -1,8 +1,11 @@
 package zoo.factories;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.util.Tuple;
+import zoo.domains.Thing;
+import zoo.domains.predators.Predator;
 import zoo.domains.things.Computer;
 import zoo.domains.things.Table;
 import zoo.helpers.IntHelper;
@@ -21,6 +24,8 @@ public class ThingConsoleFactory {
     @Autowired
     StringHelper stringHelper;
 
+    public static List<String> predatorsList = List.of("Computer", "Table");
+
     /**
      * Считывает из консоли инвентаризационный номер и название.
      *
@@ -32,6 +37,20 @@ public class ThingConsoleFactory {
 
         return new Tuple<>(num, name);
     }
+
+    /**
+     * Создаёт новую вещь по названию с параметрами, считанными с клавиатуры.
+     *
+     * @return новая вещь
+     */
+    public Thing create(String name) {
+        return switch (name) {
+            case "computer" -> createComputer();
+            case "table" -> createTable();
+            default -> null;
+        };
+    }
+
 
     /**
      * Создаёт новый компьютер с параметрами, считанными с клавиатуры.

@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.util.Tuple;
+import zoo.domains.herbos.Herbo;
 import zoo.domains.herbos.Monkey;
 import zoo.domains.herbos.Rabbit;
 import zoo.helpers.IntHelper;
@@ -14,12 +15,14 @@ import zoo.helpers.StringHelper;
  * При создании считывает параметры из консоли.
  */
 @Component
-public class HerboConsoleFactory {
+public class HerboFactory {
     @Autowired
     IntHelper intHelper;
 
     @Autowired
     StringHelper stringHelper;
+
+    public static List<String> herbosList = List.of("Monkey", "Rabbit");
 
     /**
      * Считывает из консоли суточное потребление пищи, инвентаризационный номер и доброту.
@@ -33,6 +36,19 @@ public class HerboConsoleFactory {
         String name = stringHelper.read("Enter animal name");
 
         return new Tuple<>(List.of(food, num, kindness), name);
+    }
+
+    /**
+     * Создаёт новое травоядное животное по названию с параметрами, считанными с клавиатуры.
+     *
+     * @return новое животное
+     */
+    public Herbo create(String name) {
+        return switch (name) {
+            case "monkey" -> createMonkey();
+            case "rabbit" -> createRabbit();
+            default -> null;
+        };
     }
 
     /**

@@ -1,17 +1,20 @@
 package zoo.menus;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import zoo.ZooApplication;
 import zoo.domains.Animal;
-import zoo.factories.HerboConsoleFactory;
-import zoo.factories.PredatorConsoleFactory;
-import zoo.helpers.IntHelper;
+import zoo.factories.HerboFactory;
+import zoo.factories.PredatorFactory;
+import zoo.helpers.StringHelper;
 import zoo.interfaces.Menu;
 
 /**
- * Класс для отрисовки и обработки логики меню добавление животных.
+ * Класс для отрисовки и обработки логики меню добавления животных.
  */
 @Component("AddAnimalMenu")
 public class AddAnimalMenu implements Menu {
@@ -20,24 +23,24 @@ public class AddAnimalMenu implements Menu {
     ZooApplication application;
 
     @Autowired
-    IntHelper intHelper;
+    StringHelper stringHelper;
 
     @Autowired
-    HerboConsoleFactory herboFactory;
+    HerboFactory herboFactory;
 
     @Autowired
-    PredatorConsoleFactory predatorFactory;
+    PredatorFactory predatorFactory;
+
+    static public List<String> names = Stream.concat(HerboFactory.herbosList.stream(),
+                                                     PredatorFactory.predatorsList.stream()).toList();
 
     /**
      * Выводит главное меню в консоль.
      */
     @Override
     public void print() {
-        System.out.println("Choose an action:");
-        System.out.println("    1.   Add a Monkey");
-        System.out.println("    2.   Add a Rabbit");
-        System.out.println("    3.   Add a Wolf");
-        System.out.println("    4.   Add a Tiger");
+        System.out.println("Choose an animal:");
+        names.forEach(name -> System.out.println("....Add a " + name));
     }
 
     /**
@@ -45,24 +48,20 @@ public class AddAnimalMenu implements Menu {
      */
     @Override
     public void doLogic() {
-        int action = intHelper.read("Enter a number", 1, 4);
         Animal animal;
-        if (action == 1) {
-            animal = herboFactory.createMonkey();
-        } else if (action == 2) {
-            animal = herboFactory.createRabbit();
-        } else if (action == 3) {
-            animal = predatorFactory.createWolf();
-        } else {
-            animal = predatorFactory.createTiger();
-        }
-
+        do {
+            String animalName = stringHelper.read("Enter an animal name").strip().toLowerCase();
+            animal = herboFactory.create(animalName);
+            if (Objects.isNull(animal)) {
+                animal = predatorFactory.create(animalName);
+            }
+            if (Objects.nonNull(animal)) {
+                break;
+            }
+            System.out.println("Get unknown animal, try again");
+        } while (true);
         boolean state = application.getZoo().addAnimal(animal);
-        if (state) {
-            System.out.println("Success!");
-        } else {
-            System.out.println("Unfortunately, the animal is sick! It won`t be added");
-        }
+        System.out.println(state ? "Success!" : "Unfortunately, the animal is sick! It won`t be added");
         application.changeMenu("MainMenu");
     }
 }

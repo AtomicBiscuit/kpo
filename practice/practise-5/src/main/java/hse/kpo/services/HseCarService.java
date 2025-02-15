@@ -4,6 +4,7 @@ import hse.kpo.interfaces.CarProvider;
 import hse.kpo.interfaces.CustomerProvider;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class HseCarService {
 
     @Autowired
@@ -20,6 +22,8 @@ public class HseCarService {
 
     @Autowired
     private final CustomerProvider customerProvider;
+
+    var customers = customerProvider.getCustomers();
 
     /**
      * Присваивает пользователям в хранилище продающиеся автомобили, если они совместимы.
@@ -32,6 +36,8 @@ public class HseCarService {
                      var car = carProvider.takeCar(customer);
                      if (Objects.nonNull(car)) {
                          customer.setCar(car);
+                     } else {
+                         log.warn("No car in CarService");
                      }
                  });
     }

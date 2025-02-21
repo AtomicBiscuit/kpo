@@ -34,13 +34,10 @@ public class CarStorage implements CarProvider {
      * Метод добавления {@link Car} в систему.
      *
      * @param carFactory фабрика для создания автомобилей
-     * @param carParams параметры для создания автомобиля
+     * @param carParams  параметры для создания автомобиля
      */
-    public <ProductionParams> void addCar(CarFactory<ProductionParams> carFactory, ProductionParams carParams) {
-        var car = carFactory.create(
-                carParams,
-                ++carNumberCounter
-        );
+    public <ProductionParamsT> void addCar(CarFactory<ProductionParamsT> carFactory, ProductionParamsT carParams) {
+        var car = carFactory.create(carParams, ++carNumberCounter);
 
         cars.add(car);
     }

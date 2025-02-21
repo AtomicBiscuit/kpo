@@ -34,14 +34,11 @@ public class CatamaranStorage implements CatamaranProvider {
      * Метод добавления {@link Catamaran} в систему.
      *
      * @param catamaranFactory фабрика для создания катамаранов
-     * @param catamaranParams параметры для создания катамарана
+     * @param catamaranParams  параметры для создания катамарана
      */
-    public <ProductionParams> void addCatamaran(CatamaranFactory<ProductionParams> catamaranFactory,
-                                                ProductionParams catamaranParams) {
-        var car = catamaranFactory.create(
-                catamaranParams,
-                ++carNumberCounter
-        );
+    public <ProductionParamsT> void addCatamaran(CatamaranFactory<ProductionParamsT> catamaranFactory,
+                                                 ProductionParamsT catamaranParams) {
+        var car = catamaranFactory.create(catamaranParams, ++carNumberCounter);
 
         catamarans.add(car);
     }

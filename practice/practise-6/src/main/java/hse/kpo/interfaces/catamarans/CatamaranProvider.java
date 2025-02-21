@@ -3,6 +3,9 @@ package hse.kpo.interfaces.catamarans;
 import hse.kpo.domains.Catamaran;
 import hse.kpo.domains.Customer;
 
+/**
+ * Интерфейс поставщика катамаранов.
+ */
 public interface CatamaranProvider {
 
     /**

@@ -1,14 +1,6 @@
 package hse.kpo;
 
-import hse.kpo.domains.Customer;
-import hse.kpo.factories.cars.HandCarFactory;
-import hse.kpo.factories.cars.PedalCarFactory;
-import hse.kpo.observers.SalesObserver;
-import hse.kpo.params.EmptyEngineParams;
-import hse.kpo.params.PedalEngineParams;
-import hse.kpo.storages.CarStorage;
-import hse.kpo.storages.CustomerStorage;
-import hse.kpo.services.HseCarService;
+import hse.kpo.factories.catamarans.HandCatamaranFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,53 +10,36 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class KpoApplicationTests {
 
-	@Autowired
-	private CarStorage carStorage;
+    @Autowired
+    private Hse hse;
 
-	@Autowired
-	private CustomerStorage customerStorage;
+    @Autowired
+    private HandCatamaranFactory handCatamaranFactory;
 
-	@Autowired
-	private HseCarService hseCarService;
+    @Test
+    @DisplayName("Тест загрузки контекста")
+    void contextLoads() {
+        Assertions.assertNotNull(hse);
+    }
 
-	@Autowired
-	private PedalCarFactory pedalCarFactory;
+    @Test
+    @DisplayName("Тест загрузки контекста")
+    void hseCarServiceTest() {
+        hse.addCustomer("Ivan1", 6, 4, 0);
+        hse.addCustomer("Maksim", 6, 4, 351);
+        hse.addCustomer("Petya", 6, 6, 128);
+        hse.addCustomer("Nikita", 4, 6, 85);
 
-	@Autowired
-	private HandCarFactory handCarFactory;
+        hse.addPedalCar(6);
+        hse.addLevitatingCar();
 
-	@Autowired
-	private SalesObserver salesObserver;
+        hse.addHandCar();
+        hse.addHandCatamaranWithWheels();
 
-	@Test
-	@DisplayName("Тест загрузки контекста")
-	void contextLoads() {
-		Assertions.assertNotNull(carStorage);
-		Assertions.assertNotNull(customerStorage);
-		Assertions.assertNotNull(hseCarService);
-	}
+        hse.sell();
 
-	@Test
-	@DisplayName("Тест загрузки контекста")
-	void hseCarServiceTest() {
-		hseCarService.addObserver(salesObserver);
-		customerStorage.addCustomer(Customer.builder().name("Ivan1").legPower(6).handPower(4).build());
-		customerStorage.addCustomer(Customer.builder().name("Maksim").legPower(4).handPower(6).build());
-		customerStorage.addCustomer(Customer.builder().name("Petya").legPower(6).handPower(6).build());
-		customerStorage.addCustomer(Customer.builder().name("Nikita").legPower(4).handPower(4).build());
+        System.out.println(hse.generateReport());
 
-		carStorage.addCar(pedalCarFactory, new PedalEngineParams(6));
-		carStorage.addCar(pedalCarFactory, new PedalEngineParams(6));
-
-		carStorage.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
-		carStorage.addCar(handCarFactory, EmptyEngineParams.DEFAULT);
-
-		customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
-
-		hseCarService.sellCars();
-
-		customerStorage.getCustomers().stream().map(Customer::toString).forEach(System.out::println);
-		System.out.println(salesObserver.buildReport());
-	}
-
+        hse.customerStorage.getCustomers().forEach(System.out::println);
+    }
 }

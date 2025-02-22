@@ -29,13 +29,8 @@ public class SalesAspect {
     public Object sales(ProceedingJoinPoint pjp, Sales sales) throws Throwable {
         salesObserver.checkCustomers();
 
-        String operationName = sales.value().isEmpty() ? pjp.getSignature().toShortString() : sales.value();
-        try {
-            Object result = pjp.proceed();
-            salesObserver.checkCustomers();
-            return result;
-        } catch (Throwable e) {
-            throw e;
-        }
+        Object result = pjp.proceed();
+        salesObserver.checkCustomers();
+        return result;
     }
 }

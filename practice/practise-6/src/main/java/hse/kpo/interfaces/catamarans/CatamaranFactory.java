@@ -5,9 +5,9 @@ import hse.kpo.domains.Catamaran;
 /**
  * Интерфейс для определения методов фабрик.
  *
- * @param <ProductionParamsT> параметры для фабрик
+ * @param <T> параметры для фабрик
  */
-public interface CatamaranFactory<ProductionParamsT> {
+public interface CatamaranFactory<T> {
     /**
      * Метод создания катамаранов.
      *
@@ -15,5 +15,5 @@ public interface CatamaranFactory<ProductionParamsT> {
      * @param catamaranNumber номер
      * @return {@link Catamaran}
      */
-    Catamaran create(ProductionParamsT catamaranParams, int catamaranNumber);
+    Catamaran create(T catamaranParams, int catamaranNumber);
 }

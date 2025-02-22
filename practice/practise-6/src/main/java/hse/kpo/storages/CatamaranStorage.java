@@ -36,8 +36,8 @@ public class CatamaranStorage implements CatamaranProvider {
      * @param catamaranFactory фабрика для создания катамаранов
      * @param catamaranParams  параметры для создания катамарана
      */
-    public <ProductionParamsT> void addCatamaran(CatamaranFactory<ProductionParamsT> catamaranFactory,
-                                                 ProductionParamsT catamaranParams) {
+    public <T> void addCatamaran(CatamaranFactory<T> catamaranFactory,
+                                 T catamaranParams) {
         var car = catamaranFactory.create(catamaranParams, ++carNumberCounter);
 
         catamarans.add(car);

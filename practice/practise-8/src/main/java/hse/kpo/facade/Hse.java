@@ -1,22 +1,33 @@
 package hse.kpo.facade;
 
-import hse.kpo.domains.Catamaran;
-import hse.kpo.domains.CatamaranWithWheels;
 import hse.kpo.domains.Customer;
-import hse.kpo.factories.cars.*;
-import hse.kpo.factories.catamarans.*;
+import hse.kpo.domains.cars.CatamaranWithWheels;
+import hse.kpo.domains.catamarans.Catamaran;
+import hse.kpo.enums.ReportFormat;
+import hse.kpo.enums.TransportFormat;
+import hse.kpo.factories.cars.HandCarFactory;
+import hse.kpo.factories.cars.LevitationCarFactory;
+import hse.kpo.factories.cars.PedalCarFactory;
+import hse.kpo.factories.catamarans.HandCatamaranFactory;
+import hse.kpo.factories.catamarans.LevitationCatamaranFactory;
+import hse.kpo.factories.catamarans.PedalCatamaranFactory;
+import hse.kpo.factories.export.ReportExporterFactory;
+import hse.kpo.factories.export.TransportExporterFactory;
+import hse.kpo.interfaces.SalesObserver;
 import hse.kpo.params.EmptyEngineParams;
 import hse.kpo.params.PedalEngineParams;
-import hse.kpo.services.HseCarService;
-import hse.kpo.services.HseCatamaranService;
-import hse.kpo.storages.CarStorage;
-import hse.kpo.storages.CatamaranStorage;
+import hse.kpo.services.cars.HseCarService;
+import hse.kpo.services.catamarans.HseCatamaranService;
 import hse.kpo.storages.CustomerStorage;
-import hse.kpo.observers.SalesObserver;
+import hse.kpo.storages.cars.CarStorage;
+import hse.kpo.storages.catamarans.CatamaranStorage;
 import jakarta.annotation.PostConstruct;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Random;
+import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.Random;
 
 /**
  * Фасад для работы с системой продажи транспортных средств.
@@ -27,17 +38,32 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class Hse {
     private final CustomerStorage customerStorage;
+
     private final CarStorage carStorage;
+
     private final CatamaranStorage catamaranStorage;
+
     private final HseCarService carService;
+
     private final HseCatamaranService catamaranService;
+
     private final SalesObserver salesObserver;
+
     private final PedalCarFactory pedalCarFactory;
+
     private final HandCarFactory handCarFactory;
+
     private final LevitationCarFactory levitationCarFactory;
+
     private final PedalCatamaranFactory pedalCatamaranFactory;
+
     private final HandCatamaranFactory handCatamaranFactory;
+
     private final LevitationCatamaranFactory levitationCatamaranFactory;
+
+    private final ReportExporterFactory reportExporterFactory;
+
+    private final TransportExporterFactory transportExporterFactory;
 
     @PostConstruct
     private void init() {
@@ -47,20 +73,14 @@ public class Hse {
     /**
      * Добавляет нового клиента в систему.
      *
-     * @param name имя клиента
-     * @param legPower сила ног (1-10)
+     * @param name      имя клиента
+     * @param legPower  сила ног (1-10)
      * @param handPower сила рук (1-10)
-     * @param iq уровень интеллекта (1-200)
-     * @example
-     * hse.addCustomer("Анна", 7, 5, 120);
+     * @param iq        уровень интеллекта (1-200)
+     * @example hse.addCustomer(" Анна ", 7, 5, 120);
      */
     public void addCustomer(String name, int legPower, int handPower, int iq) {
-        Customer customer = Customer.builder()
-                .name(name)
-                .legPower(legPower)
-                .handPower(handPower)
-                .iq(iq)
-                .build();
+        Customer customer = Customer.builder().name(name).legPower(legPower).handPower(handPower).iq(iq).build();
         customerStorage.addCustomer(customer);
     }
 
@@ -135,13 +155,30 @@ public class Hse {
     }
 
     /**
+     * Генерирует отчет о продажах в заданном формате.
+     *
+     * @param format формат вывода отчёта
+     * @param writer объект {@link Writer} для записи отчёта
+     */
+    public void exportReport(ReportFormat format, Writer writer) throws IOException {
+        var exporter = reportExporterFactory.create(format);
+        exporter.export(salesObserver.buildReport(), writer);
+    }
+
+    /**
      * Генерирует отчет о продажах.
      *
      * @return форматированная строка с отчетом
-     * @example
-     * System.out.println(hse.generateReport());
+     * @example System.out.println(hse.generateReport ());
      */
     public String generateReport() {
         return salesObserver.buildReport().toString();
+    }
+
+    public void exportTransport(TransportFormat format, Writer writer) throws IOException {
+        var exporter = transportExporterFactory.create(format);
+        var transports = Stream.concat(carStorage.getCars().stream(), catamaranStorage.getCatamarans().stream())
+                               .toList();
+        exporter.export(transports, writer);
     }
 }

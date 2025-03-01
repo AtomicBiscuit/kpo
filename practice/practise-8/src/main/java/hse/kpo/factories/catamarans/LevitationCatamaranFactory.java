@@ -1,7 +1,7 @@
 package hse.kpo.factories.catamarans;
 
-import hse.kpo.domains.Catamaran;
-import hse.kpo.domains.LevitationEngine;
+import hse.kpo.domains.catamarans.Catamaran;
+import hse.kpo.domains.engines.LevitationEngine;
 import hse.kpo.interfaces.catamarans.CatamaranFactory;
 import hse.kpo.params.EmptyEngineParams;
 import org.springframework.stereotype.Component;

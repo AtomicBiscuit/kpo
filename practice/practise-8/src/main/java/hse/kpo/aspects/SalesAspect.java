@@ -1,5 +1,7 @@
-package hse.kpo.observers;
+package hse.kpo.aspects;
 
+import hse.kpo.annotations.Sales;
+import hse.kpo.interfaces.SalesObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;

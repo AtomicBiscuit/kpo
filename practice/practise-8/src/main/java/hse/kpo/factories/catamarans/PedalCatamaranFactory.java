@@ -1,8 +1,8 @@
 package hse.kpo.factories.catamarans;
 
 
-import hse.kpo.domains.Catamaran;
-import hse.kpo.domains.PedalEngine;
+import hse.kpo.domains.catamarans.Catamaran;
+import hse.kpo.domains.engines.PedalEngine;
 import hse.kpo.interfaces.catamarans.CatamaranFactory;
 import hse.kpo.params.PedalEngineParams;
 import org.springframework.stereotype.Component;

@@ -1,11 +1,12 @@
-package hse.kpo.storages;
+package hse.kpo.storages.catamarans;
 
-import hse.kpo.domains.Catamaran;
+import hse.kpo.domains.catamarans.Catamaran;
 import hse.kpo.domains.Customer;
 import hse.kpo.interfaces.catamarans.CatamaranFactory;
 import hse.kpo.interfaces.catamarans.CatamaranProvider;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CatamaranStorage implements CatamaranProvider {
 
+    @Getter
     private final List<Catamaran> catamarans = new ArrayList<>();
 
     private int carNumberCounter = 0;
@@ -34,13 +36,10 @@ public class CatamaranStorage implements CatamaranProvider {
      * Метод добавления {@link Catamaran} в систему.
      *
      * @param catamaranFactory фабрика для создания катамаранов
-     * @param catamaranParams параметры для создания катамарана
+     * @param catamaranParams  параметры для создания катамарана
      */
     public <T> Catamaran addCatamaran(CatamaranFactory<T> catamaranFactory, T catamaranParams) {
-        var catamaran = catamaranFactory.create(
-                catamaranParams,
-                ++carNumberCounter
-        );
+        var catamaran = catamaranFactory.create(catamaranParams, ++carNumberCounter);
 
         catamarans.add(catamaran);
 

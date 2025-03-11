@@ -24,13 +24,13 @@ public class AnalysisService {
                                   .filterByAccount(accountId)
                                   .filterByDate(from, to)
                                   .build();
-        return data.stream().mapToInt(Operation::getSignedAmount).sum();
+        return data.stream().mapToInt(Operation::calculateSignedAmount).sum();
     }
 
     public int getSumByCategory(Identifier categoryId) {
         var data = OperationFilter.builder(operationStorage.getAllOperations())
                                   .filterByCategory(categoryId)
                                   .build();
-        return data.stream().mapToInt(Operation::getSignedAmount).sum();
+        return data.stream().mapToInt(Operation::calculateSignedAmount).sum();
     }
 }

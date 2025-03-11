@@ -3,19 +3,18 @@ package fm.params.console;
 import fm.domains.types.Identifier;
 import fm.enums.OperationType;
 import fm.helpers.ConsoleReader;
-import java.io.InputStream;
-import java.io.PrintStream;
+import fm.params.OperationParams;
 import java.util.Date;
+import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 /**
  * Класс для получения параметров операции из потока ввода.
  */
-public class ConsoleOperationParams {
+@Setter
+@Component
+public class ConsoleOperationParams implements OperationParams {
     ConsoleReader helper;
-
-    public ConsoleOperationParams(InputStream input, PrintStream output) {
-        this.helper = new ConsoleReader(input, output);
-    }
 
     public Identifier getBankAccountId() {
         return new Identifier(helper.readInt("Enter a target bank account id", 0, 1_000_000_000));

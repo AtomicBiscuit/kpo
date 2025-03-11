@@ -32,7 +32,7 @@ public class Operation {
 
     private Date date;
 
-    public int getSignedAmount() {
+    public int calculateSignedAmount() {
         return amount * (type == INCOME ? 1 : -1);
     }
 }

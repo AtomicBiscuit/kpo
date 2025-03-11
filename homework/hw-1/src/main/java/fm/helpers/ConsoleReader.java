@@ -6,11 +6,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import lombok.Getter;
+import org.springframework.stereotype.Component;
 
+@Getter
+@Component
 public class ConsoleReader {
     Scanner scanner;
 
     PrintStream output;
+
+    SimpleDateFormat format;
 
     public ConsoleReader(InputStream source, PrintStream output) {
         this.scanner = new Scanner(source);
@@ -59,7 +65,6 @@ public class ConsoleReader {
             output.print(onInput + ": ");
             String line = scanner.nextLine();
             try {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 return format.parse(line);
             } catch (ParseException exception) {
                 output.println("Invalid date, try again.");

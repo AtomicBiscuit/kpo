@@ -2,18 +2,17 @@ package fm.factories;
 
 import fm.domains.BankAccount;
 import fm.domains.types.Identifier;
+import fm.params.BankAccountParams;
 
 /**
  * Интерфейс фабрики для порождения банковских счетов.
- *
- * @param <T> параметры создания
  */
-public interface BankAccountFactory<T> {
+public interface BankAccountFactory {
     /**
      * Возвращает новый банковский счёт.
      *
      * @param params параметры для создания
      * @return {@link BankAccount}
      */
-    BankAccount createAccount(T params, Identifier id);
+    BankAccount createAccount(BankAccountParams params, Identifier id);
 }

@@ -2,18 +2,17 @@ package fm.params.console;
 
 import fm.enums.OperationType;
 import fm.helpers.ConsoleReader;
-import java.io.InputStream;
-import java.io.PrintStream;
+import fm.params.CategoryParams;
+import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 /**
  * Класс для получения параметров создания категории из потока ввода.
  */
-public class ConsoleCategoryParams {
+@Setter
+@Component
+public class ConsoleCategoryParams implements CategoryParams {
     ConsoleReader helper;
-
-    public ConsoleCategoryParams(InputStream input, PrintStream output) {
-        this.helper = new ConsoleReader(input, output);
-    }
 
     public String getName() {
         return helper.readLine("Enter an category name");

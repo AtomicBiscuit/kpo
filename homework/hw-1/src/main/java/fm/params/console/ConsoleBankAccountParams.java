@@ -1,7 +1,8 @@
 package fm.params.console;
 
-import fm.helpers.ConsoleReader;
+import fm.helpers.ConsoleHelper;
 import fm.params.BankAccountParams;
+import lombok.AllArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +11,9 @@ import org.springframework.stereotype.Component;
  */
 @Setter
 @Component
+@AllArgsConstructor
 public class ConsoleBankAccountParams implements BankAccountParams {
-    ConsoleReader helper;
+    ConsoleHelper helper;
 
     public String getName() {
         return helper.readLine("Enter an account name");

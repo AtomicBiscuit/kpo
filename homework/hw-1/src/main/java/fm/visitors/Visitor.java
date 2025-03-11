@@ -8,9 +8,9 @@ import fm.domains.Operation;
  * Интерфейс посетителя.
  */
 public interface Visitor {
-    public void visit(BankAccount account);
+    void visit(BankAccount account);
 
-    public void visit(Category category);
+    void visit(Category category);
 
-    public void visit(Operation operation);
+    void visit(Operation operation);
 }

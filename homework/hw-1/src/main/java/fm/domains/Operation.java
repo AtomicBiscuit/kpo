@@ -8,6 +8,7 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Доменный класс, представляющий операцию.
@@ -15,6 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@ToString
 public class Operation {
     private Identifier id;
 

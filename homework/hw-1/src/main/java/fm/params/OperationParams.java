@@ -1,7 +1,6 @@
 package fm.params;
 
 import fm.domains.types.Identifier;
-import fm.enums.OperationType;
 import java.util.Date;
 
 
@@ -12,8 +11,6 @@ public interface OperationParams {
     Identifier getBankAccountId();
 
     Identifier getCategoryId();
-
-    OperationType getType();
 
     int getAmount();
 

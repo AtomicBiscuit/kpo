@@ -7,20 +7,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Getter
 @Component
-public class ConsoleReader {
-    Scanner scanner;
+public class ConsoleHelper {
+    final Scanner scanner;
 
-    PrintStream output;
+    final PrintStream output;
 
     SimpleDateFormat format;
 
-    public ConsoleReader(InputStream source, PrintStream output) {
+    @Autowired
+    public ConsoleHelper(InputStream source, PrintStream output, SimpleDateFormat format) {
         this.scanner = new Scanner(source);
         this.output = output;
+        this.format = format;
     }
 
     /**

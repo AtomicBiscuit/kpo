@@ -55,7 +55,7 @@ public class FinancialFactory implements BankAccountFactory, CategoryFactory, Op
     public Operation createOperation(OperationParams operationParams, Identifier id) {
         var bankId = operationParams.getBankAccountId();
         if (accountStorage.getAccount(bankId).isEmpty()) {
-            throw new IdentifyNotFoundException("Bank account with ID  " + bankId.getId() + " not found");
+            throw new IdentifyNotFoundException("Bank account with ID " + bankId.getId() + " not found");
         }
         var categoryId = operationParams.getCategoryId();
         var category = categoryStorage.getCategory(categoryId);

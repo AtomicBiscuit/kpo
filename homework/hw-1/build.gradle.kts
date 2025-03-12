@@ -49,7 +49,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("App")
+    mainClass.set("fm.App")
 }
 
 tasks.named<JavaExec>("run") {

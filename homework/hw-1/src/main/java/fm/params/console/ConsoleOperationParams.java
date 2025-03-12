@@ -18,11 +18,11 @@ public class ConsoleOperationParams implements OperationParams {
     ConsoleHelper helper;
 
     public Identifier getBankAccountId() {
-        return new Identifier(helper.readInt("Enter a target bank account id", 1, 1_000_000_000));
+        return new Identifier(helper.readInt("Enter a target bank account id", Identifier.MIN_ID, Identifier.MAX_ID));
     }
 
     public Identifier getCategoryId() {
-        return new Identifier(helper.readInt("Enter a target category id", 1, 1_000_000_000));
+        return new Identifier(helper.readInt("Enter a target category id", Identifier.MIN_ID, Identifier.MAX_ID));
     }
 
     public int getAmount() {

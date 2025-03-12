@@ -13,11 +13,12 @@ public enum Format {
     BLUE("34"),
     PURPLE("35"),
     CYAN("36"),
-    WHITE("37");
+    WHITE("37"),
+    ERROR(String.join(";", RED.label, BOLD.label, UNDERLINE.label));
 
     private final String label;
 
-    private Format(String label) {
+    Format(String label) {
         this.label = label;
     }
 }

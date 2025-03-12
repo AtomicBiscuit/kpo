@@ -11,6 +11,10 @@ import lombok.Getter;
 public class Identifier {
     private int id;
 
+    public static final int MIN_ID = 1;
+
+    public static final int MAX_ID = 1_000_000_000;
+
     /**
      * Setter для идентификатора.
      *

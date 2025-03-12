@@ -9,6 +9,7 @@ import fm.filter.OperationFilter;
 import fm.formater.Format;
 import fm.helpers.ConsoleHelper;
 import fm.params.CategoryParams;
+import fm.storages.AccountStorage;
 import fm.storages.CategoryStorage;
 import fm.storages.OperationStorage;
 import java.io.PrintStream;
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CategoryFacade {
     CategoryStorage categoryStorage;
+
+    BankAccountFacade banks;
 
     OperationStorage operationStorage;
 
@@ -32,9 +35,11 @@ public class CategoryFacade {
     int num = 1;
 
     @Autowired
-    public CategoryFacade(CategoryStorage categoryStorage, OperationStorage operationStorage, CategoryFactory factory
-            , CategoryParams params, ConsoleHelper helper) {
+    public CategoryFacade(CategoryStorage categoryStorage, BankAccountFacade bankAccountFacade,
+                          OperationStorage operationStorage, AccountStorage accountStorage, CategoryFactory factory,
+                          CategoryParams params, ConsoleHelper helper) {
         this.categoryStorage = categoryStorage;
+        this.banks = bankAccountFacade;
         this.operationStorage = operationStorage;
         this.factory = factory;
         this.params = params;
@@ -58,20 +63,22 @@ public class CategoryFacade {
                                                .filterByCategory(id)
                                                .build();
         cascadeOperations.stream().map(Operation::getId).forEach(operationStorage::removeOperation);
+        cascadeOperations.forEach(operation -> banks.addSumToAccount(
+                operation.getBankAccountId(),
+                -operation.calculateSignedAmount()
+        ));
         categoryStorage.removeCategory(id);
     }
 
     public boolean changeCategory(Identifier id) {
         var rawCategory = categoryStorage.getCategory(id);
         if (rawCategory.isEmpty()) {
-            helper.getOutput()
-                  .println(format("Category with id " + id + " not found", Format.RED, Format.BOLD, Format.UNDERLINE));
+            helper.getOutput().println(format("Category with id " + id + " not found", Format.ERROR));
             return false;
         }
         helper.getOutput().println("Now enter new data");
         var category = rawCategory.get();
         category.setName(params.getName());
-        category.setType(params.getType());
         return true;
     }
 }

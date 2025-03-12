@@ -5,10 +5,7 @@ import static fm.enums.OperationType.INCOME;
 import fm.domains.types.Identifier;
 import fm.enums.OperationType;
 import java.util.Date;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * Доменный класс, представляющий операцию.
@@ -17,6 +14,7 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode
 public class Operation {
     private Identifier id;
 

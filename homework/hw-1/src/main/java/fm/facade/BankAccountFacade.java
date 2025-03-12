@@ -14,6 +14,7 @@ import fm.storages.AccountStorage;
 import fm.storages.OperationStorage;
 import java.io.PrintStream;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -31,6 +32,7 @@ public class BankAccountFacade {
 
     int num = 1;
 
+    @Autowired
     public BankAccountFacade(AccountStorage accountStorage, OperationStorage operationStorage,
                              BankAccountFactory factory, BankAccountParams params, ConsoleHelper helper) {
         this.accountStorage = accountStorage;
@@ -63,8 +65,7 @@ public class BankAccountFacade {
     public boolean changeAccount(Identifier id) {
         var rawAccount = accountStorage.getAccount(id);
         if (rawAccount.isEmpty()) {
-            helper.getOutput()
-                  .println(format("Account with id " + id + " not found", Format.RED, Format.BOLD, Format.UNDERLINE));
+            helper.getOutput().println(format("Account with id " + id + " not found", Format.ERROR));
             return false;
         }
         helper.getOutput().println("Now enter new data");

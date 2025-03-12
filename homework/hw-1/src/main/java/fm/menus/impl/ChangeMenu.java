@@ -45,13 +45,13 @@ public class ChangeMenu implements Menu {
             app.switchState("mainMenu");
             return;
         } else if (action == 1) {
-            var id = helper.readInt("Enter account id", 1, 1_000_000_000);
+            var id = helper.readInt("Enter account id", Identifier.MIN_ID, Identifier.MAX_ID);
             flag = bankAccountFacade.changeAccount(new Identifier(id));
         } else if (action == 2) {
-            var id = helper.readInt("Enter category id", 1, 1_000_000_000);
+            var id = helper.readInt("Enter category id", Identifier.MIN_ID, Identifier.MAX_ID);
             flag = categoryFacade.changeCategory(new Identifier(id));
         } else if (action == 3) {
-            var id = helper.readInt("Enter operation id", 1, 1_000_000_000);
+            var id = helper.readInt("Enter operation id", Identifier.MIN_ID, Identifier.MAX_ID);
             flag = operationFacade.changeOperation(new Identifier(id));
         }
         if (flag) {

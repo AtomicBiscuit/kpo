@@ -10,6 +10,9 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Класс для считывания данных из входного потока.
+ */
 @Getter
 @Component
 public class ConsoleHelper {

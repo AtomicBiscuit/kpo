@@ -2,10 +2,7 @@ package fm.domains;
 
 import fm.domains.types.Identifier;
 import fm.enums.OperationType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * Доменный класс, представляющий категорию.
@@ -14,6 +11,7 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode
 public class Category {
     private Identifier id;
 

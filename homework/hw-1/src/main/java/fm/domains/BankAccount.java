@@ -1,10 +1,7 @@
 package fm.domains;
 
 import fm.domains.types.Identifier;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * Доменный класс, представляющий банковский счёт.
@@ -13,6 +10,7 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode
 public class BankAccount {
     private Identifier id;
 

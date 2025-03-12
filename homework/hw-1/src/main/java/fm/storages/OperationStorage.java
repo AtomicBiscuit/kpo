@@ -39,8 +39,10 @@ public class OperationStorage {
      *
      * @param id идентификатор целевой операции
      */
-    public void removeOperation(Identifier id) {
-        operations.removeIf(operation -> operation.getId().equals(id));
+    public Optional<Operation> removeOperation(Identifier id) {
+        var toRemove = getOperation(id);
+        toRemove.ifPresent(operations::remove);
+        return toRemove;
     }
 
     /**

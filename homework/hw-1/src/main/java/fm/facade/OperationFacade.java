@@ -7,6 +7,7 @@ import fm.factories.OperationFactory;
 import fm.formater.Format;
 import fm.helpers.ConsoleHelper;
 import fm.params.OperationParams;
+import fm.storages.AccountStorage;
 import fm.storages.OperationStorage;
 import java.io.PrintStream;
 import lombok.Setter;
@@ -21,6 +22,8 @@ public class OperationFacade {
 
     OperationStorage storage;
 
+    AccountStorage accountStorage;
+
     OperationFactory factory;
 
     @Setter
@@ -31,10 +34,11 @@ public class OperationFacade {
     int num = 1;
 
     @Autowired
-    public OperationFacade(BankAccountFacade banks, OperationStorage storage, OperationFactory factory,
-                           OperationParams params, ConsoleHelper helper) {
+    public OperationFacade(BankAccountFacade banks, OperationStorage storage, AccountStorage accountStorage,
+                           OperationFactory factory, OperationParams params, ConsoleHelper helper) {
         this.banks = banks;
         this.storage = storage;
+        this.accountStorage = accountStorage;
         this.factory = factory;
         this.params = params;
         this.helper = helper;
@@ -53,21 +57,24 @@ public class OperationFacade {
             banks.addSumToAccount(operation.getBankAccountId(), operation.calculateSignedAmount());
         } catch (Exception e) {
             num--;
-            helper.getOutput().println(format(e.getMessage(), Format.RED, Format.BOLD, Format.UNDERLINE));
+            helper.getOutput().println(format(e.getMessage(), Format.ERROR));
             return 0;
         }
         return num - 1;
     }
 
     public void removeOperation(Identifier id) {
-        storage.removeOperation(id);
+        var operation = storage.removeOperation(id);
+        if (operation.isEmpty()) {
+            return;
+        }
+        banks.addSumToAccount(operation.get().getBankAccountId(), -operation.get().calculateSignedAmount());
     }
 
     public boolean changeOperation(Identifier id) {
         var rawOperation = storage.getOperation(id);
         if (rawOperation.isEmpty()) {
-            helper.getOutput()
-                  .println(format("Operation with id " + id + " not found", Format.RED, Format.BOLD, Format.UNDERLINE));
+            helper.getOutput().println(format("Operation with id " + id + " not found", Format.ERROR));
             return false;
         }
         helper.getOutput().println("Now enter new data");

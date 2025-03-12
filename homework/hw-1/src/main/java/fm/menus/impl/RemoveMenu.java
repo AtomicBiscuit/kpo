@@ -44,13 +44,13 @@ public class RemoveMenu implements Menu {
             app.switchState("mainMenu");
             return;
         } else if (action == 1) {
-            var id = helper.readInt("Enter account id", 1, 1_000_000_000);
+            var id = helper.readInt("Enter account id", Identifier.MIN_ID, Identifier.MAX_ID);
             bankAccountFacade.removeAccount(new Identifier(id));
         } else if (action == 2) {
-            var id = helper.readInt("Enter category id", 1, 1_000_000_000);
+            var id = helper.readInt("Enter category id", Identifier.MIN_ID, Identifier.MAX_ID);
             categoryFacade.removeCategory(new Identifier(id));
         } else if (action == 3) {
-            var id = helper.readInt("Enter operation id", 1, 1_000_000_000);
+            var id = helper.readInt("Enter operation id", Identifier.MIN_ID, Identifier.MAX_ID);
             operationFacade.removeOperation(new Identifier(id));
         }
         helper.getOutput().println(format("Complete", Format.PURPLE));

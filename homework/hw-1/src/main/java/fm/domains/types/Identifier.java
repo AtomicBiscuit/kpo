@@ -27,18 +27,6 @@ public class Identifier {
         id = newId;
     }
 
-    /**
-     * Увеличивает значение идентификатора на number
-     *
-     * @param number значение, которое будет добавлено к id
-     */
-    public void increase(int number) {
-        if (number < 0) {
-            throw new WrongValueException("Increasing value must be not less than 0");
-        }
-        id += number;
-    }
-
     public Identifier(int id) {
         setId(id);
     }

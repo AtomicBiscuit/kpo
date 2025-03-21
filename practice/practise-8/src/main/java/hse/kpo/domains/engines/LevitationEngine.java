@@ -1,6 +1,7 @@
 package hse.kpo.domains.engines;
 
 import hse.kpo.domains.Customer;
+import hse.kpo.enums.EngineTypes;
 import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.Engine;
 import lombok.ToString;
@@ -21,6 +22,6 @@ public class LevitationEngine implements Engine {
 
     @Override
     public String getType() {
-        return "Levitating";
+        return EngineTypes.LEVITATING.name();
     }
 }

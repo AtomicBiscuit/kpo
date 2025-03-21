@@ -1,6 +1,7 @@
 package hse.kpo.domains.engines;
 
 import hse.kpo.domains.Customer;
+import hse.kpo.enums.EngineTypes;
 import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.Engine;
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class PedalEngine implements Engine {
 
     @Override
     public String getType() {
-        return "Pedal";
+        return EngineTypes.PEDAL.name();
     }
 
     public PedalEngine(int size) {

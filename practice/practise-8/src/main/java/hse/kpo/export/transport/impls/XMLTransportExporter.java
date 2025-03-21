@@ -8,15 +8,17 @@ import java.util.List;
 
 public class XMLTransportExporter implements TransportExporter {
     String getFormated(Transport transport) {
-        return String.format("""
-                                     <Vehicle>
-                                         <VIN>%d</VIN>
-                                         <Type>%s</Type>
-                                         <Engine>
-                                             <Type>%s</Type>
-                                         </Engine>
-                                     </Vehicle>
-                                     """, transport.getVin(), transport.getTransportType(), transport.getEngineType());
+        return String.format(
+                """
+                        <Vehicle>
+                            <VIN>%d</VIN>
+                            <Type>%s</Type>
+                            <Engine>
+                                <Type>%s</Type>
+                            </Engine>
+                        </Vehicle>
+                        """, transport.getVin(), transport.getTransportType(), transport.getEngineType()
+        );
     }
 
     @Override
@@ -24,9 +26,9 @@ public class XMLTransportExporter implements TransportExporter {
         transports.forEach(transport -> {
             try {
                 writer.write(getFormated(transport));
-                writer.flush();
             } catch (IOException ignored) {
             }
         });
+        writer.flush();
     }
 }

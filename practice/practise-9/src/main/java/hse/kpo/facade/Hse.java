@@ -83,14 +83,14 @@ public class Hse {
      * @param iq        уровень интеллекта (1-200)
      * @example hse.addCustomer(" Анна ", 7, 5, 120);
      */
-    public void addCustomer(String name, int legPower, int handPower, int iq) {
+    public Customer addCustomer(String name, int legPower, int handPower, int iq) {
         Customer customer = Customer.builder()
                                     .name(name)
                                     .legPower(legPower)
                                     .handPower(handPower)
                                     .iq(iq)
                                     .build();
-        customerStorage.addCustomer(customer);
+        return customerStorage.addCustomer(customer);
     }
 
     /**

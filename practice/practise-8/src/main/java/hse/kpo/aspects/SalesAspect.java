@@ -1,5 +1,7 @@
-package hse.kpo.observers;
+package hse.kpo.aspects;
 
+import hse.kpo.annotations.Sales;
+import hse.kpo.interfaces.SalesObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -16,7 +18,6 @@ public class SalesAspect {
 
     @Around("@annotation(sales)")
     public Object sales(ProceedingJoinPoint pjp, Sales sales) throws Throwable {
-
         salesObserver.checkCustomers();
 
         try {

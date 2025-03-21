@@ -2,12 +2,14 @@ package hse.kpo.domains;
 
 import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.Engine;
+import lombok.Getter;
 import lombok.ToString;
 
 /**
  * Класс, реализующий {@link Engine} ручного типа.
  */
 @ToString
+@Getter
 public class HandEngine implements Engine {
     @Override
     public boolean isCompatible(Customer customer, ProductionTypes type) {

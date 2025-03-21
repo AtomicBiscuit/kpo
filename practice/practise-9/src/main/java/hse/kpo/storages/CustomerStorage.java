@@ -23,7 +23,8 @@ public class CustomerStorage implements CustomerProvider {
      *
      * @param customer покупатель
      */
-    public void addCustomer(Customer customer) {
+    public Customer addCustomer(Customer customer) {
         customers.add(customer);
+        return customer;
     }
 }

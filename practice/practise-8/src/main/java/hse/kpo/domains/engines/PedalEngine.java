@@ -1,5 +1,7 @@
-package hse.kpo.domains;
+package hse.kpo.domains.engines;
 
+import hse.kpo.domains.Customer;
+import hse.kpo.enums.EngineTypes;
 import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.Engine;
 import lombok.Getter;
@@ -20,6 +22,11 @@ public class PedalEngine implements Engine {
             case ProductionTypes.CATAMARAN -> customer.getLegPower() > 2;
             case null, default -> throw new RuntimeException("This type of production doesn't exist");
         };
+    }
+
+    @Override
+    public String getType() {
+        return EngineTypes.PEDAL.name();
     }
 
     public PedalEngine(int size) {

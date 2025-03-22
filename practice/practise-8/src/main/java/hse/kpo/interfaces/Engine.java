@@ -10,8 +10,10 @@ public interface Engine {
      * Метод для проверки совместимости двигателя с покупателем.
      *
      * @param customer - покупатель, с которым мы сравниваем двигатель
-     * @param type - тип объекта
+     * @param type     - тип объекта
      * @return true, если двигатель подходит покупателю
      */
     boolean isCompatible(Customer customer, ProductionTypes type);
+
+    String getType();
 }

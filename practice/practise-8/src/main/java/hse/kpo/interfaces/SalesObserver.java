@@ -1,4 +1,4 @@
-package hse.kpo.observers;
+package hse.kpo.interfaces;
 
 import hse.kpo.domains.Customer;
 import hse.kpo.domains.Report;

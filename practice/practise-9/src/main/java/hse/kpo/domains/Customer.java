@@ -12,18 +12,17 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
+@Setter
 public class Customer {
-    private final String name;
+    private String name;
 
-    private final int legPower;
+    private int legPower;
 
-    private final int handPower;
+    private int handPower;
 
-    private final int iq;
+    private int iq;
 
-    @Setter
     private Car car;
 
-    @Setter
     private Catamaran catamaran;
 }

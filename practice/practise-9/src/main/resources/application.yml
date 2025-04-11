@@ -1,8 +1,4 @@
 spring:
   application:
-    name: products-api
+    name: kpo-app
 
-
-  jackson:
-    serialization:
-      FAIL_ON_EMPTY_BEANS: false

@@ -1,13 +1,13 @@
 package hse.kpo.storages;
 
-import hse.kpo.domains.cars.Car;
 import hse.kpo.domains.Customer;
+import hse.kpo.domains.cars.Car;
 import hse.kpo.interfaces.cars.CarFactory;
 import hse.kpo.interfaces.cars.CarProvider;
 import java.util.ArrayList;
 import java.util.List;
-
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,6 +19,7 @@ public class CarStorage implements CarProvider {
     @Getter
     private final List<Car> cars = new ArrayList<>();
 
+    @Setter
     private int carNumberCounter = 0;
 
     @Override
@@ -37,7 +38,7 @@ public class CarStorage implements CarProvider {
      * Метод добавления {@link Car} в систему.
      *
      * @param carFactory фабрика для создания автомобилей
-     * @param carParams параметры для создания автомобиля
+     * @param carParams  параметры для создания автомобиля
      */
     public <T> Car addCar(CarFactory<T> carFactory, T carParams) {
         var car = carFactory.create(

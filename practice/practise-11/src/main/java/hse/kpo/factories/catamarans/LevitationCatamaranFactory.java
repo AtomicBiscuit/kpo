@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class LevitationCatamaranFactory implements CatamaranFactory<EmptyEngineParams> {
     @Override
-    public Catamaran create(EmptyEngineParams catamaranParams, int catamaranNumber) {
+    public Catamaran create(EmptyEngineParams catamaranParams) {
         var engine = new LevitationEngine(); // Создаем двигатель без каких-либо параметров
 
-        return new Catamaran(catamaranNumber, engine); // создаем катамаран с левитирующим приводом
+        return new Catamaran(engine); // создаем катамаран с левитирующим приводом
     }
 }

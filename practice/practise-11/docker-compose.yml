@@ -1,20 +1,22 @@
 services:
-  postgres:
-    image: postgres:15-alpine
-    container_name: postgres_db
+  db:
+    restart: always
+    image: postgres:16
     environment:
+      POSTGRES_PASSWORD: hsepassword
       POSTGRES_DB: car_db
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+      PGDATA: /var/lib/postgresql/data/pgdata
     ports:
-      - "5432:5432"
+      - '6431:5432'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
-      interval: 5s
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d car_db" ]
+      interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 10s
 
 #  app:
 #    build: .
@@ -29,6 +31,3 @@ services:
 #    depends_on:
 #      postgres:
 #        condition: service_healthy
-
-volumes:
-  postgres_data:

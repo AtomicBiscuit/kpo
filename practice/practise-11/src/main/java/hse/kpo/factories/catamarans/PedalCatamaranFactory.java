@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class PedalCatamaranFactory implements CatamaranFactory<PedalEngineParams> {
     @Override
-    public Catamaran create(PedalEngineParams catamaranParams, int catamaranNumber) {
+    public Catamaran create(PedalEngineParams catamaranParams) {
         var engine = new PedalEngine(catamaranParams.pedalSize()); // создаем двигатель на основе переданных параметров
 
-        return new Catamaran(catamaranNumber, engine); // создаем катамаран с педальным приводом
+        return new Catamaran(engine); // создаем катамаран с педальным приводом
     }
 }

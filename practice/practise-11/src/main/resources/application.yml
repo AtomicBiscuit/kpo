@@ -1,6 +1,17 @@
 spring:
   application:
     name: products-api
-
+  datasource:
+    url: jdbc:postgresql://localhost:6431/car_db
+    username: postgres
+    password: hsepassword
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
 server:
   port: 8080

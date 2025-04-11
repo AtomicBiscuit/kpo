@@ -1,32 +1,39 @@
 package hse.kpo.domains.cars;
 
-import hse.kpo.domains.Customer;
-import hse.kpo.domains.HandEngine;
-import hse.kpo.domains.LevitationEngine;
-import hse.kpo.domains.PedalEngine;
+import hse.kpo.domains.*;
 import hse.kpo.enums.EngineTypes;
 import hse.kpo.enums.ProductionTypes;
 import hse.kpo.interfaces.Engine;
 import hse.kpo.interfaces.Transport;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+
 /**
  * Класс хранящий информацию о машине.
  */
+@Getter
+@Entity
+@Table(name = "cars")
 @ToString
 @NoArgsConstructor
 public class Car implements Transport {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "engine_id")
+    private AbstractEngine engine;
 
-    @Getter
-    private Engine engine;
-
-    @Getter
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int vin;
 
-    public Car(int vin, Engine engine) {
+    public Car(int vin, AbstractEngine engine) {
         this.vin = vin;
+        this.engine = engine;
+    }
+
+    public Car(AbstractEngine engine) {
         this.engine = engine;
     }
 
@@ -39,7 +46,7 @@ public class Car implements Transport {
         }
         if (engine instanceof LevitationEngine) {
             return EngineTypes.LEVITATION.name();
-        };
+        }
         throw new RuntimeException("Where is engine???");
     }
 

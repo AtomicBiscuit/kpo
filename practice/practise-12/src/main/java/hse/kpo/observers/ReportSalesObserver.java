@@ -4,14 +4,14 @@ import hse.kpo.builders.ReportBuilder;
 import hse.kpo.domains.Customer;
 import hse.kpo.domains.Report;
 import hse.kpo.enums.ProductionTypes;
-import hse.kpo.storages.CustomerStorage;
+import hse.kpo.services.customers.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class ReportSalesObserver implements SalesObserver {
-    private final CustomerStorage customerStorage;
+    private final CustomerService customerService;
 
     private final ReportBuilder reportBuilder = new ReportBuilder();
 
@@ -20,7 +20,7 @@ public class ReportSalesObserver implements SalesObserver {
     }
 
     public void checkCustomers() {
-        reportBuilder.addCustomers(customerStorage.getCustomers());
+        reportBuilder.addCustomers(customerService.getCustomers());
     }
 
     @Override

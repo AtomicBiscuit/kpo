@@ -1,23 +1,10 @@
 package hse.kpo.domains.cars;
 
-import hse.kpo.domains.AbstractEngine;
-import hse.kpo.domains.Customer;
-import hse.kpo.domains.HandEngine;
-import hse.kpo.domains.LevitationEngine;
-import hse.kpo.domains.PedalEngine;
+import hse.kpo.domains.*;
 import hse.kpo.enums.EngineTypes;
 import hse.kpo.enums.ProductionTypes;
-import hse.kpo.interfaces.Engine;
 import hse.kpo.interfaces.Transport;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,7 +20,6 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class Car implements Transport {
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "engine_id")
     private AbstractEngine engine;
@@ -42,6 +28,10 @@ public class Car implements Transport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int vin;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
     public Car(int vin, AbstractEngine engine) {
         this.vin = vin;
         this.engine = engine;
@@ -49,6 +39,10 @@ public class Car implements Transport {
 
     public Car(AbstractEngine engine) {
         this.engine = engine;
+    }
+
+    public boolean isCompatible(Customer customer) {
+        return this.engine.isCompatible(customer, ProductionTypes.CAR);
     }
 
     public String getEngineType() {
@@ -60,12 +54,8 @@ public class Car implements Transport {
         }
         if (engine instanceof LevitationEngine) {
             return EngineTypes.LEVITATION.name();
-        };
+        }
         throw new RuntimeException("Where is engine???");
-    }
-
-    public boolean isCompatible(Customer customer) {
-        return this.engine.isCompatible(customer, ProductionTypes.CAR);
     }
 
     @Override

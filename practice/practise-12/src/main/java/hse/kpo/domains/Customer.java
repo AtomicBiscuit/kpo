@@ -2,29 +2,46 @@ package hse.kpo.domains;
 
 import hse.kpo.domains.cars.Car;
 import hse.kpo.domains.catamarans.Catamaran;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.*;
 
-/**
- * Класс, описывающий покупателя.
- */
 @Getter
+@Setter
 @ToString
-@Builder
+@Entity
+@Table(name = "customers")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
-    private final String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    private final int legPower;
+    @Column(nullable = false, unique = true)
+    private String name;
 
-    private final int handPower;
+    @Column(nullable = false)
+    private int legPower;
 
-    private final int iq;
+    @Column(nullable = false)
+    private int handPower;
 
-    @Setter
-    private Car car;
+    @Column(nullable = false)
+    private int iq;
 
-    @Setter
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Car> cars = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "catamaran_id")
     private Catamaran catamaran;
+
+    public Customer(String name, int legPower, int handPower, int iq) {
+        this.name = name;
+        this.legPower = legPower;
+        this.handPower = handPower;
+        this.iq = iq;
+    }
 }

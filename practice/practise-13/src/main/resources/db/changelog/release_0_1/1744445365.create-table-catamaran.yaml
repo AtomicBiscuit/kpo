@@ -4,23 +4,7 @@ databaseChangeLog:
       author: Nikita
       changes:
         - createTable:
-            tableName: engines
-            columns:
-              - column:
-                  name: id
-                  autoIncrement: true
-                  type: INT
-                  constraints:
-                    primaryKey: true
-              - column:
-                  name: engine_type
-                  type: VARCHAR(50)
-              - column:
-                  name: size
-                  type: INT
-
-        - createTable:
-            tableName: cars
+            tableName: catamarans
             columns:
               - column:
                   name: vin
@@ -36,8 +20,8 @@ databaseChangeLog:
                   type: INTEGER # Связь с customer
 
         - addForeignKeyConstraint:
-            baseTableName: cars
+            baseTableName: catamarans
             baseColumnNames: engine_id # Связь с engines.id
             referencedTableName: engines
             referencedColumnNames: id
-            constraintName: fk_car_engine
+            constraintName: fk_catamaran_engine

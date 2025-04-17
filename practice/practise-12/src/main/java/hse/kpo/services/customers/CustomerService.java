@@ -39,6 +39,7 @@ public class CustomerService implements CustomerProvider {
     }
 
     public boolean deleteCustomer(String name) {
-        return customerRepository.deleteByName(name);
+        customerRepository.deleteByName(name);
+        return true;
     }
 }

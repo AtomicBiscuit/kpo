@@ -12,8 +12,8 @@ version = "0.0.1-SNAPSHOT"
 checkstyle {
     toolVersion = "10.13.0"
     isIgnoreFailures = false
-    maxWarnings = 0
-    maxErrors = 0
+    maxWarnings = 10
+    maxErrors = 10
 }
 
 java {

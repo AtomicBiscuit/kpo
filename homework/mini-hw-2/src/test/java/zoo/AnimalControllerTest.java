@@ -106,9 +106,10 @@ class AnimalControllerTest {
 
         var request = AnimalFeedRequest.builder().foodName("Eda").id(animal.getId()).build();
 
-        String responseJson = mockMvc.perform(post("/api/animals/feed").contentType(MediaType.APPLICATION_JSON)
-                                                                       .content(objectMapper.writeValueAsString(request)))
-                                     .andExpect(status().isOk())
+        String responseJson = mockMvc.perform(
+                                             post("/api/animals/feed").contentType(MediaType.APPLICATION_JSON)
+                                                                      .content(objectMapper.writeValueAsString(request))
+                                     ).andExpect(status().isOk())
                                      .andReturn()
                                      .getResponse()
                                      .getContentAsString();
@@ -183,9 +184,10 @@ class AnimalControllerTest {
 
         var request = AnimalMoveRequest.builder().animalId(animal.getId()).enclosureId(enclosure.getId()).build();
 
-        String responseJson = mockMvc.perform(post("/api/animals/move").contentType(MediaType.APPLICATION_JSON)
-                                                                       .content(objectMapper.writeValueAsString(request)))
-                                     .andExpect(status().isOk())
+        String responseJson = mockMvc.perform(
+                                             post("/api/animals/move").contentType(MediaType.APPLICATION_JSON)
+                                                                      .content(objectMapper.writeValueAsString(request))
+                                     ).andExpect(status().isOk())
                                      .andReturn()
                                      .getResponse()
                                      .getContentAsString();

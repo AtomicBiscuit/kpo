@@ -73,7 +73,7 @@ public class ScheduleController {
     /**
      * Обработка запроса на добавления кормления в расписание.
      *
-     * @param request {@link }
+     * @param request {@link ScheduleCreateRequest}
      * @return Представление в виде HttpResponse {@link FeedingSchedule}
      */
     @PostMapping("/create")

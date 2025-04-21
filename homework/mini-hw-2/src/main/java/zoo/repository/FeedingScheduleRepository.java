@@ -1,10 +1,9 @@
 package zoo.repository;
 
 import java.time.LocalTime;
-import java.util.Collections;
 import java.util.List;
-import org.hibernate.annotations.processing.SQL;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import zoo.domain.schedule.FeedingSchedule;
 import zoo.domain.schedule.FeedingScheduleProvider;
 
@@ -12,38 +11,30 @@ import zoo.domain.schedule.FeedingScheduleProvider;
  * Unit-of-work для работы с таблицей животных.
  */
 public interface FeedingScheduleRepository extends JpaRepository<FeedingSchedule, Integer>, FeedingScheduleProvider {
-    @SQL("""
-            SELECT * FROM feedingschedule
+    @Query("""
+            SELECT fs FROM FeedingSchedule fs
             """)
     @Override
-    default List<FeedingSchedule> getSchedules() {
-        return Collections.emptyList();
-    }
+    List<FeedingSchedule> getSchedules();
 
-    @SQL("""
-            SELECT * FROM feedingschedule
-                     WHERE animal_id = :animalId
+    @Query("""
+            SELECT fs FROM FeedingSchedule fs
+                     WHERE fs.animal.id = :animalId
             """)
     @Override
-    default List<FeedingSchedule> getAnimalSchedules(Integer animalId) {
-        return Collections.emptyList();
-    }
+    List<FeedingSchedule> getAnimalSchedules(Integer animalId);
 
-    @SQL("""
-            SELECT * FROM feedingSchedule
-                     WHERE schedule BETWEEN :start AND :end
+    @Query("""
+            SELECT fs FROM FeedingSchedule fs
+                     WHERE fs.schedule BETWEEN :start AND :end
             """)
     @Override
-    default List<FeedingSchedule> getSchedulesInInterval(LocalTime start, LocalTime end) {
-        return Collections.emptyList();
-    }
+    List<FeedingSchedule> getSchedulesInInterval(LocalTime start, LocalTime end);
 
-    @SQL("""
-            SELECT * FROM feedingschedule
-                     WHERE id = :id
+    @Query("""
+            SELECT fs FROM FeedingSchedule fs
+                     WHERE fs.id = :id
             """)
     @Override
-    default FeedingSchedule getScheduleById(Integer id) {
-        return null;
-    }
+    FeedingSchedule getScheduleById(Integer id);
 }

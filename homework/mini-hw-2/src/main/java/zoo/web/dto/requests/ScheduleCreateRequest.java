@@ -15,7 +15,7 @@ public record ScheduleCreateRequest(
         @NotNull
         Integer animalId,
 
-        @Schema(description = "Время", example = "13:30:00")
+        @Schema(description = "Время", example = "03:30:00")
         @NotNull
         LocalTime dailyTime,
 

@@ -18,7 +18,7 @@ import zoo.domain.animals.Animal;
  * Класс-представление для расписания кормления животных.
  */
 @Entity
-@Table(name = "feedingschedule")
+@Table(name = "feeding_schedule")
 @Getter
 @Setter
 @NoArgsConstructor

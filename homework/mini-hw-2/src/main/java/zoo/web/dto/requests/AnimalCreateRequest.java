@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import java.util.Date;
+import java.time.LocalDate;
 import lombok.Builder;
 
 /**
@@ -29,7 +29,7 @@ public record AnimalCreateRequest(
 
         @Schema(description = "Дата рождения", example = "2000-01-01")
         @NotNull
-        Date birthday,
+        LocalDate birthday,
 
         @Schema(description = "Пол", example = "male")
         @Pattern(regexp = "male|female|hermaphrodite")

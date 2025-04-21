@@ -14,7 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,7 +40,7 @@ public class Animal {
 
     String name;
 
-    Date birthday;
+    LocalDate birthday;
 
     @Enumerated(EnumType.STRING)
     AnimalSex sex;
@@ -61,7 +61,7 @@ public class Animal {
     /**
      * Конструктор для класса Animal.
      */
-    public Animal(String type, String name, Date birthday, AnimalSex sex, String favoriteFood, Boolean healthy) {
+    public Animal(String type, String name, LocalDate birthday, AnimalSex sex, String favoriteFood, Boolean healthy) {
         this.type = type;
         this.name = name;
         this.birthday = birthday;

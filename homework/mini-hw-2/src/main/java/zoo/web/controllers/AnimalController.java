@@ -25,10 +25,13 @@ import zoo.domain.exceptions.ZooException;
 import zoo.domain.schedule.FeedingSchedule;
 import zoo.domain.schedule.FeedingScheduleProvider;
 import zoo.service.AnimalTransferService;
+import zoo.service.FeedingOrganizationService;
 import zoo.web.dto.requests.AnimalCreateRequest;
+import zoo.web.dto.requests.AnimalFeedRequest;
 import zoo.web.dto.requests.AnimalMoveRequest;
 import zoo.web.dto.requests.AnimalUpdateRequest;
 import zoo.web.dto.responses.AnimalResponse;
+import zoo.web.dto.responses.ScheduleResponse;
 
 /**
  * Контроллер для обработки запросов, связанных с животными.
@@ -46,6 +49,8 @@ public class AnimalController {
     private final AnimalFactory animalFactory;
 
     private final AnimalTransferService animalTransferService;
+
+    private final FeedingOrganizationService feedingOrganizationService;
 
     /**
      * Возвращает животное по Id.
@@ -79,16 +84,33 @@ public class AnimalController {
     /**
      * Возвращает полное расписание кормления животного.
      *
-     * @return Представление в виде HttpResponse {@link zoo.domain.schedule.FeedingSchedule List of FeedingSchedule}
+     * @return Представление в виде HttpResponse {@link FeedingSchedule List of FeedingSchedule}
      */
     @GetMapping("/{id}/schedule")
-    public ResponseEntity<List<FeedingSchedule>> getAllSchedulesAttachedToAnimal(@PathVariable int id) {
+    public ResponseEntity<List<ScheduleResponse>> getAllSchedulesAttachedToAnimal(@PathVariable int id) {
         var animal = animalProvider.getAnimalById(id);
         if (animal == null) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(feedingScheduleProvider.getAnimalSchedules(id));
+        return ResponseEntity.ok(feedingScheduleProvider.getAnimalSchedules(id)
+                                                        .stream()
+                                                        .map(ScheduleResponse::from)
+                                                        .toList());
+    }
+
+    /**
+     * Обрабатывает запрос на кормление животного.
+     */
+    @PostMapping("/feed")
+    public ResponseEntity<Void> feed(@Valid @RequestBody AnimalFeedRequest request, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new ZooException(bindingResult.getAllErrors().getFirst().getDefaultMessage());
+        }
+
+        feedingOrganizationService.feedAnimalById(request.id(), request.foodName());
+
+        return ResponseEntity.ok().build();
     }
 
     /**

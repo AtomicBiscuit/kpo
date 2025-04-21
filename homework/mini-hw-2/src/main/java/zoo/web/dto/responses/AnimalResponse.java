@@ -1,6 +1,6 @@
 package zoo.web.dto.responses;
 
-import java.util.Date;
+import java.time.LocalDate;
 import lombok.Builder;
 import zoo.domain.animals.Animal;
 
@@ -17,7 +17,7 @@ public record AnimalResponse(
 
         String name,
 
-        Date birthday,
+        LocalDate birthday,
 
         String sex,
 

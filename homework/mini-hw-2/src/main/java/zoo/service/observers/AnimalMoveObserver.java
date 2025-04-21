@@ -23,7 +23,7 @@ public class AnimalMoveObserver implements Observer<Animal> {
             return;
         }
         String message = String.format(
-                "%s с ID-%d в вольер ID-%d",
+                "%s(ID-%d) в вольер ID-%d",
                 animal.getName(),
                 animal.getId(),
                 animal.getEnclosure() != null ? animal.getEnclosure().getId() : null

@@ -10,5 +10,6 @@ RUN gradle dependencies --refresh-dependencies && \
 FROM openjdk:21-jdk-slim
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
-EXPOSE 8080
+EXPOSE 8081
+EXPOSE 9090
 CMD ["java", "-jar", "app.jar"]

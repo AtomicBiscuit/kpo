@@ -70,10 +70,6 @@ public class Animal {
         this.healthy = healthy;
     }
 
-    public void treat() {
-        healthy = true;
-    }
-
     /**
      * Перемещает животное в новый вольер.
      *

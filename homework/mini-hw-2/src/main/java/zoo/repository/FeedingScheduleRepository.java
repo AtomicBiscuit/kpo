@@ -37,4 +37,7 @@ public interface FeedingScheduleRepository extends JpaRepository<FeedingSchedule
             """)
     @Override
     FeedingSchedule getScheduleById(Integer id);
+
+    @Override
+    FeedingSchedule save(FeedingSchedule schedule);
 }

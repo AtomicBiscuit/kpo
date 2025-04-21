@@ -159,7 +159,7 @@ public class AnimalController {
         }
 
         var animal = animalTransferService.moveAnimalById(request.animalId(), request.enclosureId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(AnimalResponse.from(animal));
+        return ResponseEntity.ok(AnimalResponse.from(animal));
     }
 
     /**

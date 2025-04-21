@@ -22,4 +22,7 @@ public interface EnclosureRepository extends JpaRepository<Enclosure, Integer>, 
             """)
     @Override
     Enclosure getEnclosureById(Integer id);
+
+    @Override
+    Enclosure save(Enclosure enclosure);
 }

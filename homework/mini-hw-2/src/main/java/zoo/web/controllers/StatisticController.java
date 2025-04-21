@@ -24,7 +24,7 @@ import zoo.web.dto.requests.AnimalFoodRequest;
  * Контроллер для обработки запросов, связанных со статистикой.
  */
 @RestController
-@RequestMapping("/api/schedule")
+@RequestMapping("/api/stats")
 @RequiredArgsConstructor
 @Tag(name = "Статистика", description = "Вычисление статистики")
 @Service

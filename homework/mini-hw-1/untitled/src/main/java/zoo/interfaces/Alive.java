@@ -1,7 +1,20 @@
 package zoo.interfaces;
 
-import lombok.Getter;
-
+/**
+ * Интерфейс для живых существ.
+ */
 public interface Alive {
-    int Food;
+    /**
+     * Устанавливает ежедневное потребление еды значением food.
+     *
+     * @param food новое значение дружелюбности
+     */
+    void setFood(int food);
+
+    /**
+     * Возвращает ежедневное потребление еды.
+     *
+     * @return значение food
+     */
+    int getFood();
 }

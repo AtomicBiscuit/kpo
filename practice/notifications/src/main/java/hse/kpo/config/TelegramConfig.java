@@ -15,9 +15,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Setter
 public class TelegramConfig {
     private String username;
-
     private String token;
-
     private String chatId;
 
     @Bean

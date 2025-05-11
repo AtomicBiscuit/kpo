@@ -1,26 +1,25 @@
 plugins {
-	java
-	checkstyle
-	jacoco
-	id("org.springframework.boot") version "3.4.2"
-	id("io.spring.dependency-management") version "1.1.7"
-	id("org.liquibase.gradle") version "2.0.4"
-	id("com.google.protobuf") version "0.9.4"
+    java
+    checkstyle
+    jacoco
+    id("org.springframework.boot") version "3.4.2"
+    id("io.spring.dependency-management") version "1.1.7"
+    id("com.google.protobuf") version "0.9.4"
 }
 
 group = "hse"
 version = "0.0.1-SNAPSHOT"
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 configurations {
-	compileOnly {
-		extendsFrom(configurations.annotationProcessor.get())
-	}
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
 }
 
 repositories {
@@ -47,34 +46,34 @@ dependencies {
 }
 
 protobuf {
-	protoc {
-		artifact = "com.google.protobuf:protoc:3.22.0"
-	}
-	plugins {
-		create("grpc") {
-			artifact = "io.grpc:protoc-gen-grpc-java:1.54.0"
-		}
-	}
-	generateProtoTasks {
-		all().forEach { task ->
-			task.plugins {
-				create("grpc")
-			}
-		}
-	}
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.25.1"
+    }
+    plugins {
+        create("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.62.2"
+        }
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.plugins {
+                create("grpc")
+            }
+        }
+    }
 }
 
 sourceSets {
-	main {
-		java {
-			srcDirs(
-				"build/generated/source/proto/main/java",
-				"build/generated/source/proto/main/grpc"
-			)
-		}
-	}
+    main {
+        java {
+            srcDirs(
+                "build/generated/source/proto/main/java",
+                "build/generated/source/proto/main/grpc"
+            )
+        }
+    }
 }
 
 tasks.named("compileJava").configure {
-	dependsOn("generateProto")
+    dependsOn("generateProto")
 }

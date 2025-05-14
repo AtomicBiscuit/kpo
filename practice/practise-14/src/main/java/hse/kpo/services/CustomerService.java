@@ -31,7 +31,7 @@ public class CustomerService implements CustomerProvider {
     @Override
     public void addCustomer(Customer customer) {
         var savedCustomer = customerRepository.save(customer);
-        kafkaProducerService.sendCustomerToTraining(customer);
+        kafkaProducerService.sendCustomerToTraining(savedCustomer);
     }
 
     @Transactional

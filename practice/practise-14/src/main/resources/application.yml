@@ -27,7 +27,7 @@ spring:
       security.protocol: PLAINTEXT
 #      socket.connection.setup.timeout.ms: 30000
     admin:
-      auto-create-topics: true
+      auto-create: true
     consumer:
       group-id: kpo
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer

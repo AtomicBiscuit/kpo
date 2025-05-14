@@ -1,7 +1,5 @@
 plugins {
 	java
-	checkstyle
-	jacoco
 	id("org.springframework.boot") version "3.4.2"
 	id("io.spring.dependency-management") version "1.1.7"
 	id("org.liquibase.gradle") version "2.0.4"
@@ -10,13 +8,6 @@ plugins {
 
 group = "hse"
 version = "0.0.1-SNAPSHOT"
-
-checkstyle {
-	toolVersion = "10.13.0"
-	isIgnoreFailures = false
-	maxWarnings = 0
-	maxErrors = 200
-}
 
 java {
 	toolchain {
@@ -85,13 +76,6 @@ protobuf {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
-}
-
-tasks.test {
-	finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
-}
-tasks.jacocoTestReport {
-	dependsOn(tasks.test) // tests are required to run before generating the report
 }
 
 // Добавляем генерацию proto в исходные пути

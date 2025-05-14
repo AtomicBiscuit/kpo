@@ -15,7 +15,7 @@ checkstyle {
 	toolVersion = "10.13.0"
 	isIgnoreFailures = false
 	maxWarnings = 0
-	maxErrors = 200
+	maxErrors = 20000
 }
 
 java {

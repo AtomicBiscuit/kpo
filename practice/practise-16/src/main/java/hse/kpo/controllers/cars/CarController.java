@@ -15,8 +15,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -87,6 +89,8 @@ public class CarController {
 
     @PutMapping("/{vin}")
     @Operation(summary = "Обновить автомобиль")
+    @CacheEvict(value = "cars", key = "#vin")
+    @Transactional
     public ResponseEntity<Car> updateCar(
             @PathVariable int vin,
             @Valid @RequestBody CarRequest request) {

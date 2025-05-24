@@ -1,14 +1,11 @@
 spring:
   application:
-    name: file-storage
+    name: file-analysis
   datasource:
-    url: jdbc:postgresql://localhost:5432/file_db
-    #url: { $POSTGRESQL_URL }
-    #username: { $POSTGRESQL_USERNAME }
-    #password: { $POSTGRESQL_PASSWORD }
+    url: { $SPRING_POSTGRESQL_URL }
+    username: { $SPRING_POSTGRESQL_USERNAME }
+    password: { $SPRING_POSTGRESQL_PASSWORD }
     driver-class-name: org.postgresql.Driver
-    password: postgres
-    username: postgres
   jpa:
     show-sql: false
     hibernate:

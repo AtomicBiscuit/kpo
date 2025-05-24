@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -83,5 +84,21 @@ class FileControllerTest {
                               .getResponse()
                               .getContentAsString();
         assertEquals("Example  data", response);
+    }
+
+    @Test
+    @DisplayName("Успешное получение одинаковых файлов")
+    void getSameCount_Success() throws Exception {
+        doReturn(Optional.of(FileEntity.builder().hash("abc").build())).when(fileRepository)
+                                                                       .getFileById(any(Integer.class));
+        doReturn(List.of()).when(fileRepository).findAllByHash(any(String.class));
+
+        var response = mockMvc.perform(get("/api/files/0/same"))
+                              .andExpect(status().isOk())
+                              .andReturn()
+                              .getResponse()
+                              .getContentAsString();
+        var resp = objectMapper.readValue(response, Integer.class);
+        assertEquals(0, resp);
     }
 }
